@@ -227,6 +227,18 @@ function effective(plan, modelId) {
       note: entry.note
     };
   }
+  // 官方直接公布每模型单价的计划（如 Command Code Go）：直接用真实费率，不走信用池代理
+  if (entry.rate) {
+    return {
+      input: entry.rate.input,
+      cachedInput: entry.rate.cachedInput ?? entry.rate.input * 0.1,
+      output: entry.rate.output,
+      allowanceUSD: entry.allowanceUSD ?? null,
+      byok: false,
+      source: entry.source,
+      note: (entry.note || "") + "（官方公布单价）"
+    };
+  }
   const allow = entry.allowanceUSD;
   if (!allow || allow <= 0) {
     // 防御兜底：无额度计划按官方价计（如免费个人版），避免 0 除以 0 得 $0

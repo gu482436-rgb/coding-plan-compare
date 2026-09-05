@@ -20,7 +20,7 @@
         "input": 3.0,
         "cachedInput": 0.3,
         "output": 15.0,
-        "note": "官方 kimi.com 国际价：$3/$0.30/$15 每百万（缓存命中$0.30）"
+        "note": "官方 kimi.com 国际价：$3/$0.30/$15 每百万（缓存命中$0.30）（每日自动从 LiteLLM 刷新 2026-09-05）"
       }
     },
     {
@@ -30,16 +30,16 @@
       "contextWindow": 1000000,
       "tier": "轻量",
       "api": {
-        "input": 0.44,
-        "cachedInput": 0.014,
-        "output": 1.32,
+        "input": 0.28,
+        "cachedInput": 0.028,
+        "output": 0.42,
         "offPeak": {
           "input": 0.22,
           "cachedInput": 0.007,
           "output": 0.66,
           "note": "空闲时段(北京时09:00-12:00/14:00-18:00之外)为峰时一半，官方峰谷价"
         },
-        "note": "官方峰时价(2026-08-17 调价后)：输入(未命中)$0.44、缓存命中$0.014、输出$1.32 每百万；空闲时段减半"
+        "note": "官方峰时价(2026-08-17 调价后)：输入(未命中)$0.44、缓存命中$0.014、输出$1.32 每百万；空闲时段减半（每日自动从 LiteLLM 刷新 2026-09-05）"
       }
     },
     {
@@ -58,7 +58,7 @@
           "output": 1.98,
           "note": "空闲时段为峰时一半，官方峰谷价"
         },
-        "note": "官方峰时价：输入(未命中)$1.32、缓存命中$0.044、输出$3.96 每百万；空闲时段减半"
+        "note": "官方峰时价：输入(未命中)$1.32、缓存命中$0.044、输出$3.96 每百万；空闲时段减半（每日自动从 LiteLLM 刷新 2026-09-05）"
       }
     },
     {
@@ -227,7 +227,7 @@
         "input": 0.2,
         "cachedInput": 0.02,
         "output": 1.2,
-        "note": "OpenAI 官方价(2026-07-30后) $0.20/$0.02/$1.20 每百万"
+        "note": "OpenAI 官方价(2026-07-30后) $0.20/$0.02/$1.20 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
       }
     },
     {
@@ -240,7 +240,7 @@
         "input": 2.0,
         "cachedInput": 0.2,
         "output": 12.0,
-        "note": "OpenAI 官方价 $2.00/$0.20/$12.00 每百万"
+        "note": "OpenAI 官方价 $2.00/$0.20/$12.00 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
       }
     },
     {
@@ -250,10 +250,10 @@
       "contextWindow": 1050000,
       "tier": "旗舰",
       "api": {
-        "input": 5.0,
-        "cachedInput": 0.5,
-        "output": 30.0,
-        "note": "OpenAI 官方价 $5.00/$0.50/$30.00 每百万"
+        "input": 4.0,
+        "cachedInput": 0.4,
+        "output": 20.0,
+        "note": "OpenAI 官方价 $5.00/$0.50/$30.00 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
       }
     },
     {
@@ -266,7 +266,7 @@
         "input": 10.0,
         "cachedInput": 1.0,
         "output": 50.0,
-        "note": "OpenAI 官方价(2026-09-03发布) $10/$1/$50 每百万"
+        "note": "OpenAI 官方价(2026-09-03发布) $10/$1/$50 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
       }
     },
     {
@@ -279,7 +279,7 @@
         "input": 2.0,
         "cachedInput": 0.2,
         "output": 10.0,
-        "note": "Anthropic 官方价 $2/$0.20/$10 每百万（intro 价已永久化）"
+        "note": "Anthropic 官方价 $2/$0.20/$10 每百万（intro 价已永久化）（每日自动从 LiteLLM 刷新 2026-09-05）"
       }
     },
     {
@@ -292,7 +292,7 @@
         "input": 5.0,
         "cachedInput": 0.5,
         "output": 25.0,
-        "note": "Anthropic 官方价 $5/$0.50/$25 每百万"
+        "note": "Anthropic 官方价 $5/$0.50/$25 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
       }
     },
     {
@@ -318,7 +318,7 @@
         "input": 0.75,
         "cachedInput": 0.075,
         "output": 3.75,
-        "note": "官方价 $0.75/$0.075/$3.75 每百万"
+        "note": "官方价 $0.75/$0.075/$3.75 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
       }
     }
   ],
@@ -333,33 +333,63 @@
       "models": {
         "kimi-k3": {
           "allowanceUSD": 10,
-          "source": "estimated",
-          "note": "Go 额度池 $10（DeepSeek 档用户确认，其余同池估算）"
+          "rate": {
+            "input": 3.0,
+            "cachedInput": 0.3,
+            "output": 15.0
+          },
+          "source": "official",
+          "note": "Command Code Go 官方公布每百万单价（docs/plans/go）"
         },
         "deepseek-v4-flash": {
           "allowanceUSD": 10,
-          "source": "user",
-          "note": "Go 额度池 $10（用户确认）"
+          "rate": {
+            "input": 0.22,
+            "cachedInput": 0.007,
+            "output": 0.66
+          },
+          "source": "official",
+          "note": "Command Code Go 官方单价（谷时；峰时 $0.44/$1.32）。Go 上 $10 信用池用户确认"
         },
         "deepseek-v4-pro": {
           "allowanceUSD": 10,
-          "source": "estimated",
-          "note": "Go 额度池 $10（与 Flash 同池估算）"
+          "rate": {
+            "input": 0.66,
+            "cachedInput": 0.022,
+            "output": 1.98
+          },
+          "source": "official",
+          "note": "Command Code Go 官方单价（谷时；峰时 $1.32/$3.96）"
         },
         "glm-5.3-flash": {
           "allowanceUSD": 10,
-          "source": "estimated",
-          "note": "Go 额度池 $10（估算）"
+          "rate": {
+            "input": 0.15,
+            "cachedInput": 0.03,
+            "output": 0.5
+          },
+          "source": "official",
+          "note": "Command Code Go 官方公布每百万单价"
         },
         "glm-5.3": {
           "allowanceUSD": 10,
-          "source": "estimated",
-          "note": "Go 额度池 $10（估算）"
+          "rate": {
+            "input": 1.4,
+            "cachedInput": 0.26,
+            "output": 4.4
+          },
+          "source": "official",
+          "note": "Command Code Go 官方公布每百万单价"
         },
         "qwen3.8-flash": {
           "allowanceUSD": 10,
-          "source": "estimated",
-          "note": "Go 额度池 $10（估算）"
+          "rate": {
+            "input": 0.16,
+            "cachedInput": 0.016,
+            "output": 0.47
+          },
+          "source": "official",
+          "note": "Command Code Go 官方公布每百万单价（Qwen 3.8 Flash）"
         }
       }
     },
