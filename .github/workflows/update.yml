@@ -1,0 +1,38 @@
+name: Update coding plan prices
+
+on:
+  schedule:
+    # 每日 03:17 UTC 跑一次（避开整点高峰）
+    - cron: "17 3 * * *"
+  workflow_dispatch: {}      # 允许手动在 Actions 页面点一下运行
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Run hybrid price crawler
+        run: python scripts/update_prices.py
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "coding-plan-bot"
+          git config user.email "bot@users.noreply.github.com"
+          if [ -n "$(git status --porcelain data/pricing.json)" ]; then
+            git add data/pricing.json
+            git commit -m "chore: auto-update prices $(date -u +'%Y-%m-%d')"
+            git push
+            echo "pushed update"
+          else
+            echo "no changes"
+          fi

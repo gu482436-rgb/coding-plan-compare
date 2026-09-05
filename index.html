@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="GT2Xwsjlr3jQJmmefDcPKl">
+<head data-page-node-id="lGaeEebMIm3yAGzvdLcgjy">
+<meta charset="UTF-8" data-page-node-id="YVzobc8l326W5W88A3xjz1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="N4ISlXp8nsDi5WEVzOHbGm" />
+<title>AI 编程模型 Token 价格对比</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --panel: #ffffff;
+    --ink: #1f2329;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --accent: #2563eb;
+    --accent-soft: #eff4ff;
+    --cheap: #16a34a;
+    --cheap-soft: #ecfdf3;
+    --warn: #b45309;
+    --warn-soft: #fffbeb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", Segoe UI, Roboto, sans-serif;
+    font-size: 14px; line-height: 1.5;
+  }
+  header { background: var(--panel); border-bottom: 1px solid var(--line); padding: 16px 24px; }
+  header h1 { margin: 0; font-size: 20px; }
+  header .sub { color: var(--muted); margin-top: 4px; font-size: 13px; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 18px 24px 60px; }
+  .banner {
+    background: var(--warn-soft); border: 1px solid #fde68a; color: var(--warn);
+    padding: 10px 14px; border-radius: 8px; font-size: 12.5px; margin-bottom: 16px;
+  }
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: flex-end;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 18px; margin-bottom: 16px;
+  }
+  .ctrl { display: flex; flex-direction: column; gap: 5px; }
+  .ctrl label { font-size: 12px; color: var(--muted); }
+  .ctrl .val { font-weight: 600; color: var(--accent); }
+  input[type=range] { width: 160px; }
+  select, .seg button {
+    font: inherit; border: 1px solid var(--line); background: #fff; color: var(--ink);
+    border-radius: 7px; padding: 6px 10px; cursor: pointer;
+  }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; }
+  .seg button { border: none; border-radius: 0; border-right: 1px solid var(--line); }
+  .seg button:last-child { border-right: none; }
+  .seg button.on { background: var(--accent); color: #fff; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+  .tabs button {
+    font: inherit; border: 1px solid var(--line); background: #fff; color: var(--ink);
+    border-radius: 8px; padding: 8px 16px; cursor: pointer;
+  }
+  .tabs button.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; background: var(--panel);
+    border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  th, td { text-align: right; padding: 10px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:first-child, td:first-child, th.l, td.l { text-align: left; }
+  thead th { background: #f1f3f5; font-size: 12.5px; color: #374151; cursor: pointer; user-select: none; }
+  thead th:hover { background: #e8eaed; }
+  tbody tr:hover { background: #fafbfc; }
+  tr.cheap td { background: var(--cheap-soft); }
+  .badge { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+  .badge.off { background: var(--accent-soft); color: var(--accent); border-color: #c7dbff; }
+  .badge.est { background: var(--warn-soft); color: var(--warn); border-color: #fcd34d; }
+  .badge.user { background: #ecfdf3; color: var(--cheap); border-color: #bbf7d0; }
+  .badge.sub { background: #f3e8ff; color: #7c3aed; border-color: #d8b4fe; }
+  .chip { display:inline-block; font-size:11px; padding:1px 7px; border-radius:999px; background:#eef2ff; color:#4338ca; margin-left:6px; }
+  .price { font-variant-numeric: tabular-nums; }
+  .win { color: var(--cheap); font-weight: 700; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .row-click { cursor: pointer; }
+  .hint { color: var(--muted); font-size: 12px; margin: 8px 2px 12px; }
+  .modelpick { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom: 10px; }
+  .modelpick select { min-width: 260px; }
+  .updated { color: var(--muted); font-size: 12px; }
+  .foot { color: var(--muted); font-size: 12px; margin-top: 18px; }
+  .bar { height: 8px; background: var(--accent-soft); border-radius: 4px; position: relative; min-width: 60px; }
+  .bar > i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 4px; }
+  .allow { font-weight: 600; }
+</style>
+</head>
+<body data-page-node-id="sBABMCQs407ok1xhR3KBcA">
+<header data-page-node-id="Ja0LPfGbviNTFfQrSr8T6l">
+  <h1 data-page-node-id="nM9ke0DIC0ArEIbcoEOB1w">AI 编程模型 Token 价格对比</h1>
+  <div class="sub" data-page-node-id="7mrEPPayLIQtBKnI8eYglY">只比 coding plan（官方 coding plan + 第三方聚合器）· 纯 API 基准价仅作折算 · 自动更新 <span class="updated" id="updated" data-page-node-id="D90EAq9XQrH694uEFVS5iP"></span></div>
+</header>
+<div class="wrap" data-page-node-id="QyeOXJ9of5propJWvf7kAN">
+  <div class="banner" id="banner" data-page-node-id="WNJKc7Vw3Tkhr8F6pPf3hI"></div>
+
+  <div class="controls" data-page-node-id="mGTy8V4aQrA52rvDLEIRl8">
+    <div class="ctrl" data-page-node-id="SFTBXuZoWWTgsFR6eFypK7">
+      <label data-page-node-id="AKhYeJAaF63CxvHA0QNRuL">缓存命中率：<span class="val" id="chVal" data-page-node-id="7V0O29f5wx105MkYlE2DCw">98%</span></label>
+      <input type="range" id="cacheHit" min="0" max="100" value="98" step="1" data-page-node-id="FuZSRENEAypQImbtVFRIYN" />
+    </div>
+    <div class="ctrl" data-page-node-id="ZA0dLjR7nzqOXAZMvbOAbs">
+      <label data-page-node-id="ZpNZX1rPZ4gMvCvB3Q1FCA">输入 : 输出 比</label>
+      <select id="ioRatio" data-page-node-id="wF2goJHgbuiiPaTvyTAi7V">
+        <option value="1" data-page-node-id="SkkNmEG3I6EU33x4Hug5La">1 : 1</option>
+        <option value="2" data-page-node-id="teuPNaarhPK0wVMT1vvXzE">2 : 1</option>
+        <option value="3" selected data-page-node-id="eIwdAqp4SQ0ZpQk3Boy4kx">3 : 1</option>
+        <option value="5" data-page-node-id="YxUVNOcuscAxjkNXHh4pt8">5 : 1</option>
+        <option value="10" data-page-node-id="CK00x6kLCN0F4TXcBGI6OB">10 : 1</option>
+      </select>
+    </div>
+    <div class="ctrl" data-page-node-id="hZBo4ZjrA62zFWK8AOQXIQ">
+      <label data-page-node-id="POS5AQjMGtANruhsFWraJ4">显示单位</label>
+      <div class="seg" id="unitSeg" data-page-node-id="CG0LVyHqIiblzeyXorI4j1">
+        <button data-unit="per_100M" class="on" data-page-node-id="dV51wTicIOT35Zt74Gs3AE">每亿 token</button>
+        <button data-unit="per_1M" data-page-node-id="yYlzJy55Th22f7D7ArQJff">每百万 token</button>
+      </div>
+    </div>
+    <div class="ctrl" data-page-node-id="WT6Bh3FJt9kelQbbQUcK4K">
+      <label data-page-node-id="r5CA7GHDlVcE8l8xBup4ny">时段（峰谷价）</label>
+      <div class="seg" id="tierSeg" data-page-node-id="wFPRXprUiMGB59wscHnksG">
+        <button data-tier="peak" class="on" data-page-node-id="M7v8g0aKC7MBhg8F5gQgna">峰时</button>
+        <button data-tier="offPeak" data-page-node-id="HWqfCBeubRFRrE0B4uPjcd">谷时</button>
+      </div>
+    </div>
+    <div class="ctrl" data-page-node-id="SDtcTHsq2tg27swgHEQwkW">
+      <label data-page-node-id="VoYTfAPMXmah5UnNLHIlFm">厂商类型</label>
+      <select id="typeFilter" data-page-node-id="2ZI5WmIEXydlWA89OoIHyn">
+        <option value="all" data-page-node-id="rDPSMaXw3VfOLpfXHbRhU7">全部 coding plan</option>
+        <option value="coding_plan" data-page-node-id="OiOoyTxPkEvLWI1ECCnHhq">第三方聚合器</option>
+        <option value="official_coding_plan" data-page-node-id="OG7fNJuoryCq96rET0TwLL">官方 coding plan</option>
+        <option value="agent_platform">Agent 平台</option>
+        <option value="official_subscription">官方订阅档</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="tabs" data-page-node-id="WuBGnEEMVF1m6xE1YEQG67">
+    <button data-tab="rank" class="on" data-page-node-id="jVpQ6dTDn52L7jahd1YEgB">模型总榜</button>
+    <button data-tab="compare" data-page-node-id="7BdzH5HUGPckhtwXtONcGM">单模型对比</button>
+    <button data-tab="api" data-page-node-id="s3GpKpctB1ti3I3Fe0mwnR">API 基准价</button>
+  </div>
+
+  <div id="view-rank" data-page-node-id="jBty2Yw6Kuxu8JHS4dBgyA">
+    <div class="hint" data-page-node-id="RFDKmKaFA5vaFfxncGVOf5">按「综合价（每亿 token）」升序 = 越靠上越便宜。综合价 = 该模型官方API价 ×（月费÷额度）后再按缓存/输入输出加权。点任意一行进入该模型横向对比。</div>
+    <table data-page-node-id="bgWVtInJrFPHZwv6mekOSz">
+      <thead data-page-node-id="TQbXEzUSSGIfTY0QQQu41J"><tr data-page-node-id="VF5SOlLX5w0nqpOUdhzkfu">
+        <th class="l" data-sort="name" data-page-node-id="OZ2UF2bGTRDPtQmJrBJj2u">模型</th>
+        <th class="l" data-sort="maker" data-page-node-id="AKOJODHkxFUuhLbwAoDnOT">厂商</th>
+        <th data-sort="ctx" data-page-node-id="XUFSjikGxRJGJWKDiDt9hb">上下文</th>
+        <th class="l" data-sort="cheapestPlan" data-page-node-id="5EPWRd5Rvqbr9fMYPyIYQ5">最便宜套餐</th>
+        <th data-sort="blended" data-page-node-id="MBAPDWVI5NJhNoeCNpVFWo">综合价<span class="chip" id="unitChip1" data-page-node-id="Ri6FyeaMbGGvD1427au2yx">/亿</span></th>
+        <th data-sort="allow" data-page-node-id="4HHerZoNqtyUPTnhOZIsnH">该档额度($)</th>
+        <th data-sort="input" data-page-node-id="ZAD5D00arBrJLG1jao1Efh">输入</th>
+        <th data-sort="cached" data-page-node-id="H8HvVniVi0WAW8gNyo4QuX">缓存输入</th>
+        <th data-sort="output" data-page-node-id="qSywTDcp5nGm5SX2DKRuVr">输出</th>
+      </tr></thead>
+      <tbody id="rankBody" data-page-node-id="wbk1Is3BxtgF4W33HrBHRW"></tbody>
+    </table>
+  </div>
+
+  <div id="view-compare" style="display:none" data-page-node-id="w3Q484OE3YC5qSP25h4SZO">
+    <div class="modelpick" data-page-node-id="sHR0TJVh8Zl15lnALWDvXz">
+      <label data-page-node-id="f90mzXX1I55G9q4V6frfK5">选择模型：</label>
+      <select id="modelSel" data-page-node-id="msUyCOMKavDGpCehTRnJMD"></select>
+      <span class="hint" style="margin:0" id="cmpHint" data-page-node-id="AmPMZBGwHoWk43pjBlXerE"></span>
+    </div>
+    <table data-page-node-id="BrtT48MHj2uwZI0GgNND46">
+      <thead data-page-node-id="4GCnhapvBGf6xkKAj4vKeD"><tr data-page-node-id="QAZGKMrWt7u7OlzPC5dn2S">
+        <th class="l" data-page-node-id="3WzQuMqSglyJfwErow0glT">厂商 / 套餐</th>
+        <th class="l" data-page-node-id="mT36YKZLBs9lAUayoQwhCz">类型</th>
+        <th data-sort="month" data-page-node-id="QJDkxIImqsleMa7qlCpSMb">月费($)</th>
+        <th data-sort="allow" data-page-node-id="FgIMu90DdUpOAzyfyNnpDi">额度($)</th>
+        <th data-sort="blended" data-page-node-id="6YxLXhs0VigayrGAYg2VJv">综合价<span class="chip" id="unitChip2" data-page-node-id="W0C3wtdYjDlIxw6EeWgCWz">/亿</span></th>
+        <th data-sort="input" data-page-node-id="IKApVr5h2GoMvzg71j0eRV">输入</th>
+        <th data-sort="cached" data-page-node-id="9pdt9EE6CKcqpknGMZIAbB">缓存输入</th>
+        <th data-sort="output" data-page-node-id="mXoLE9nATrK7qrnUFB3jmD">输出</th>
+        <th class="l" data-page-node-id="KMYDxes2XBa51i0YPcl2yG">来源</th>
+      </tr></thead>
+      <tbody id="cmpBody" data-page-node-id="vi9pw4X8aGHMubL5eo3VfD"></tbody>
+    </table>
+    <div class="hint" id="cmpSummary" style="margin-top:12px" data-page-node-id="tccQV3Ej2tM8Gg86gGGCoz"></div>
+  </div>
+
+  <div id="view-api" style="display:none" data-page-node-id="U0GWVAmaQanzl4iET60L0M">
+    <div class="hint" data-page-node-id="IdGJcA5OJbmdNDtJDREa1W">各模型的<strong data-page-node-id="DcAASfLaZhFkn18HbGBB1Y">官方 API 基准价</strong>（USD / 每百万 token），用于折算各 plan 的有效单价。多数标 est，以官方实时数据为准。</div>
+    <table data-page-node-id="W8jUJf7UMYLjb8p7fv9paM">
+      <thead data-page-node-id="X3hgnMzEY2Qx2VVmneFpLt"><tr data-page-node-id="ijkB2NIjHEvBInC68DULG0">
+        <th class="l" data-page-node-id="XFbcEKB94nw3q2ksRL3r3F">模型</th>
+        <th class="l" data-page-node-id="YRWRHmlt1lwase0ZGtEEmk">厂商</th>
+        <th data-page-node-id="E5h4HSJnwCIXMmH8UNJADj">输入</th>
+        <th data-page-node-id="JnL1uLDxobRIgphg1Kk1kX">缓存输入</th>
+        <th data-page-node-id="5hiX1DUrKBcHF4JXuQB5u1">输出</th>
+        <th class="l" data-page-node-id="HQW5fROn9HlEPZHBFzm9H1">来源</th>
+      </tr></thead>
+      <tbody id="apiBody" data-page-node-id="MHZEq34FtvFBb09N0JB1fI"></tbody>
+    </table>
+  </div>
+
+  <div class="foot" data-page-node-id="8oZEiusmK9x6YpwkYQo3Kl">有效单价：① 订阅制 = 官方API价 ×（月费 ÷ 额度）；② Agent 平台(byok) = 官方API价 × 倍率（默认 0 加价）。综合价 = 有效输入×输入占比×(1−命中) + 有效缓存输入×输入占比×命中 + 有效输出×输出占比。额度=该 plan 给该模型的美元信用额（共享池）。Agent 平台（WorkBuddy/CodeBuddy）对混元按官方价计（免费额度很小，已按超额价算）。有峰谷价的模型（如 DeepSeek V4 Flash）可用「时段」切换。Command Code Go=$10、GOAT=$60 为用户确认；其余额度多为估算，待替换。</div>
+</div>
+
+<script>
+let DATA = null;
+const state = { cacheHit: 0.98, ioRatio: 3, unit: "per_100M", typeFilter: "all", apiTier: "peak", tab: "rank", sortRank: {k:"blended", dir:1}, sortCmp: {k:"blended", dir:1}, selModel: null };
+
+function unitMult() { return state.unit === "per_100M" ? 100 : 1; }
+function unitLabel() { return state.unit === "per_100M" ? "/亿" : "/百万"; }
+function modelById(id) { return DATA.models.find(m => m.id === id); }
+
+// 计算某 plan 对某模型的有效单价（USD/每百万）
+function effective(plan, modelId) {
+  const m = modelById(modelId);
+  const entry = plan.models[modelId];
+  if (!m || !entry) return null;
+  // 峰谷价：选中谷时且该模型有 offPeak 档则用谷时价，否则用峰时(api)
+  const api = (state.apiTier === "offPeak" && m.api.offPeak) ? m.api.offPeak : m.api;
+  // Agent 平台（byok）：有效价 = 官方价 × markup × per-model 倍率（0=免费）
+  if (plan.byok) {
+    const mult = (plan.markup ?? 1) * (entry.priceMultiplier ?? 1);
+    const isFree = mult === 0;
+    return {
+      input: api.input * mult,
+      cachedInput: api.cachedInput * mult,
+      output: api.output * mult,
+      allowanceUSD: isFree ? 0 : null,
+      byok: true,
+      source: entry.source,
+      note: entry.note
+    };
+  }
+  const allow = entry.allowanceUSD;
+  if (!allow || allow <= 0) {
+    // 防御兜底：无额度计划按官方价计（如免费个人版），避免 0 除以 0 得 $0
+    return {
+      input: api.input,
+      cachedInput: api.cachedInput,
+      output: api.output,
+      allowanceUSD: 0,
+      byok: true,
+      source: entry.source,
+      note: (entry.note || "") + "（无额度，按官方价计）"
+    };
+  }
+  const ratio = plan.monthlyUSD / allow; // 月费/额度
+  return {
+    input: api.input * ratio,
+    cachedInput: api.cachedInput * ratio,
+    output: api.output * ratio,
+    allowanceUSD: allow,
+    source: entry.source,
+    note: entry.note
+  };
+}
+function blended(p) {
+  const io = state.ioRatio, ch = state.cacheHit;
+  const inShare = io / (io + 1), outShare = 1 / (io + 1);
+  const miss = inShare * (1 - ch), hit = inShare * ch;
+  return (p.input * miss + p.cachedInput * hit + p.output * outShare); // per 1M
+}
+function show(v) { return (v * unitMult()).toFixed(2); }
+function allowShow(a) { return a === 0 ? "免费" : a === null ? "自带Key" : "$" + a; }
+
+function plansForModel(modelId) {
+  const out = [];
+  for (const pl of DATA.plans) {
+    if (state.typeFilter !== "all" && pl.type !== state.typeFilter) continue;
+    if (pl.models[modelId]) {
+      const eff = effective(pl, modelId);
+      out.push({ plan: pl, eff: eff, blended: blended(eff) });
+    }
+  }
+  return out;
+}
+function cheapestForModel(modelId) {
+  const arr = plansForModel(modelId);
+  if (!arr.length) return null;
+  return arr.reduce((a, b) => b.blended < a.blended ? b : a);
+}
+
+function srcBadge(s) {
+  if (s === "user") return '<span class="badge user">确认</span>';
+  if (s === "estimated") return '<span class="badge est">est</span>';
+  return '<span class="badge">参考</span>';
+}
+
+function renderRank() {
+  const rows = DATA.models.map(m => {
+    const c = cheapestForModel(m.id);
+    return { m, cheapest: c };
+  }).filter(r => r.cheapest);
+  const k = state.sortRank.k, dir = state.sortRank.dir;
+  rows.sort((a, b) => {
+    let va, vb;
+    if (k === "name") { va = a.m.name; vb = b.m.name; return va.localeCompare(vb, "zh") * dir; }
+    if (k === "maker") { va = a.m.maker; vb = b.m.maker; return va.localeCompare(vb, "zh") * dir; }
+    if (k === "ctx") { va = a.m.contextWindow; vb = b.m.contextWindow; }
+    else if (k === "cheapestPlan") { va = a.cheapest.plan.vendor; vb = b.cheapest.plan.vendor; return va.localeCompare(vb, "zh") * dir; }
+    else if (k === "allow") { va = a.cheapest.eff.allowanceUSD; vb = b.cheapest.eff.allowanceUSD; }
+    else { va = a.cheapest.blended; vb = b.cheapest.blended; }
+    return (va - vb) * dir;
+  });
+  const tb = document.getElementById("rankBody");
+  tb.innerHTML = rows.map(r => {
+    const c = r.cheapest;
+    return `<tr class="row-click" data-model="${r.m.id}">
+      <td class="l">${r.m.name}<span class="badge">${r.m.tier}</span></td>
+      <td class="l">${r.m.maker}</td>
+      <td>${r.m.contextWindow.toLocaleString()}</td>
+      <td class="l"><a href="${c.plan.url}" target="_blank">${c.plan.vendor} · ${c.plan.plan}</a></td>
+      <td class="price win">$${show(c.blended)}</td>
+      <td class="price allow">${allowShow(c.eff.allowanceUSD)}</td>
+      <td class="price">$${show(c.eff.input)}</td>
+      <td class="price">$${show(c.eff.cachedInput)}</td>
+      <td class="price">$${show(c.eff.output)}</td>
+    </tr>`;
+  }).join("");
+  document.getElementById("unitChip1").textContent = unitLabel();
+}
+
+function renderCompare() {
+  const mid = state.selModel;
+  const sel = document.getElementById("modelSel");
+  sel.innerHTML = DATA.models.map(m => `<option value="${m.id}" ${m.id===mid?"selected":""}>${m.name}（${m.maker}）</option>`).join("");
+  const arr = plansForModel(mid).slice().sort((a, b) => {
+    const k = state.sortCmp.k, dir = state.sortCmp.dir;
+    if (k === "month") return (a.plan.monthlyUSD - b.plan.monthlyUSD) * dir;
+    if (k === "allow") return (a.eff.allowanceUSD - b.eff.allowanceUSD) * dir;
+    if (k === "input") return (a.eff.input - b.eff.input) * dir;
+    if (k === "cached") return (a.eff.cachedInput - b.eff.cachedInput) * dir;
+    if (k === "output") return (a.eff.output - b.eff.output) * dir;
+    return (a.blended - b.blended) * dir;
+  });
+  const minB = arr.length ? arr[0].blended : 0;
+  const maxB = arr.length ? Math.max(...arr.map(x => x.blended)) : 1;
+  const tb = document.getElementById("cmpBody");
+  tb.innerHTML = arr.map(r => {
+    const isCheap = Math.abs(r.blended - minB) < 1e-9;
+    const pct = maxB > 0 ? Math.max(6, (r.blended / maxB) * 100) : 0;
+    const tb = r.plan.type;
+    const typeBadge = tb === "official_coding_plan" ? '<span class="badge off">官方</span>' : tb === "agent_platform" ? '<span class="badge off">平台</span>' : tb === "official_subscription" ? '<span class="badge sub">订阅</span>' : '<span class="badge">聚合</span>';
+    return `<tr class="${isCheap ? "cheap" : ""}">
+      <td class="l"><a href="${r.plan.url}" target="_blank">${r.plan.vendor} · ${r.plan.plan}</a></td>
+      <td class="l">${typeBadge}</td>
+      <td>${r.plan.byok ? "—" : (r.plan.monthlyUSD === 0 ? "免费" : "$" + r.plan.monthlyUSD)}</td>
+      <td class="price allow">${allowShow(r.eff.allowanceUSD)}</td>
+      <td class="price ${isCheap ? "win" : ""}">$${show(r.blended)} <span class="bar" style="display:inline-block;width:${pct}px;vertical-align:middle"><i style="width:${pct}px"></i></span></td>
+      <td class="price">$${show(r.eff.input)}</td>
+      <td class="price">$${show(r.eff.cachedInput)}</td>
+      <td class="price">$${show(r.eff.output)}</td>
+      <td class="l">${srcBadge(r.eff.source)}${r.eff.note ? " " + r.eff.note : ""}</td>
+    </tr>`;
+  }).join("");
+  document.getElementById("unitChip2").textContent = unitLabel();
+  const mName = (modelById(mid) || {}).name || "";
+  const cheapest = arr[0];
+  document.getElementById("cmpHint").textContent = arr.length ? `共 ${arr.length} 个 plan 提供 ${mName}` : `暂无 plan 提供 ${mName}`;
+  document.getElementById("cmpSummary").innerHTML = cheapest
+    ? `✅ <b>${mName}</b> 最便宜：<b>${cheapest.plan.vendor} · ${cheapest.plan.plan}</b>，综合价 $${show(cheapest.blended)}${unitLabel()}；${cheapest.plan.byok ? "平台直连（" + allowShow(cheapest.eff.allowanceUSD) + "）" : "月费 $" + cheapest.plan.monthlyUSD + "、额度 " + allowShow(cheapest.eff.allowanceUSD)}。`
+    : "";
+}
+
+function renderApi() {
+  const tb = document.getElementById("apiBody");
+  tb.innerHTML = DATA.models.map(m => {
+    const a = m.api;
+    return `<tr>
+      <td class="l">${m.name}</td>
+      <td class="l">${m.maker}</td>
+      <td class="price">$${a.input}</td>
+      <td class="price">$${a.cachedInput}</td>
+      <td class="price">$${a.output}</td>
+      <td class="l"><span class="badge est">est</span></td>
+    </tr>`;
+  }).join("");
+}
+
+function renderAll() {
+  if (state.tab === "rank") renderRank();
+  else if (state.tab === "compare") renderCompare();
+  else renderApi();
+}
+
+document.getElementById("cacheHit").addEventListener("input", e => {
+  state.cacheHit = +e.target.value / 100;
+  document.getElementById("chVal").textContent = e.target.value + "%";
+  renderAll();
+});
+document.getElementById("ioRatio").addEventListener("change", e => { state.ioRatio = +e.target.value; renderAll(); });
+document.getElementById("typeFilter").addEventListener("change", e => { state.typeFilter = e.target.value; renderAll(); });
+document.getElementById("unitSeg").addEventListener("click", e => {
+  if (e.target.dataset.unit) { state.unit = e.target.dataset.unit;
+    [...document.querySelectorAll("#unitSeg button")].forEach(b => b.classList.toggle("on", b === e.target)); renderAll(); }
+});
+document.getElementById("tierSeg").addEventListener("click", e => {
+  if (e.target.dataset.tier) { state.apiTier = e.target.dataset.tier;
+    [...document.querySelectorAll("#tierSeg button")].forEach(b => b.classList.toggle("on", b === e.target)); renderAll(); }
+});
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  state.tab = b.dataset.tab;
+  document.querySelectorAll(".tabs button").forEach(x => x.classList.toggle("on", x === b));
+  document.getElementById("view-rank").style.display = state.tab === "rank" ? "" : "none";
+  document.getElementById("view-compare").style.display = state.tab === "compare" ? "" : "none";
+  document.getElementById("view-api").style.display = state.tab === "api" ? "" : "none";
+  renderAll();
+}));
+document.getElementById("modelSel").addEventListener("change", e => { state.selModel = e.target.value; renderCompare(); });
+document.getElementById("rankBody").addEventListener("click", e => {
+  const tr = e.target.closest("tr[data-model]");
+  if (!tr) return;
+  state.selModel = tr.dataset.model;
+  document.querySelector('.tabs button[data-tab="compare"]').click();
+});
+document.querySelectorAll("#view-rank thead th[data-sort]").forEach(th => th.addEventListener("click", () => {
+  const k = th.dataset.sort; state.sortRank.dir = state.sortRank.k === k ? -state.sortRank.dir : 1; state.sortRank.k = k; renderRank();
+}));
+document.querySelectorAll("#view-compare thead th[data-sort]").forEach(th => th.addEventListener("click", () => {
+  const k = th.dataset.sort; state.sortCmp.dir = state.sortCmp.k === k ? -state.sortCmp.dir : 1; state.sortCmp.k = k; renderCompare();
+}));
+
+fetch("data/pricing.json").then(r => r.json()).then(d => {
+  DATA = d;
+  state.selModel = d.models[0].id;
+  document.getElementById("updated").textContent = "· 更新于 " + (d.meta.lastUpdated || "未知");
+  document.getElementById("banner").textContent = "⚠️ " + (d.meta.note || "");
+  renderAll();
+}).catch(err => {
+  document.getElementById("banner").textContent = "数据加载失败（请通过本地服务器或 GitHub Pages 访问，勿用 file:// 直接打开）：" + err;
+});
+</script>
+</body>
+</html>
