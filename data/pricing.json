@@ -7,7 +7,7 @@
       "inputOutputRatio": 3,
       "unit": "per_100M"
     },
-    "note": "模型中心结构（2026-09-05 全量官方价核对版）。models[].api = 各家官方定价页核实价（USD/百万token）。plans 含 ①第三方 coding 聚合器 ②官方 coding plan ③官方订阅档 ④Agent 平台(byok)。订阅制有效单价=官方API价×(月费÷该模型独立额度allowanceUSD)——**额度是分模型独立的，不是统一池子**（已核实：OpenCode Go 分 $15/$30 两档、Command Code GOAT 各模型 $20~$70 不等）。已核实的硬值：OpenCode Go 分模型额度(llmgateway核实)、Command Code GOAT 的 DeepSeek V4 Flash=$60/ Hy3=$70/ GPT-5.6 Sol=$70/ Qwen3.8 Flash=$20(用户核对)、Go 的 DeepSeek=$10。其余额度标 est 待补。Agent 平台(byok)有效单价=官方API价×markup(默认1.0)。缓存命中价：OpenAI=输入10%，DeepSeek 缓存≈输入3%，其余≈输入10%。"
+    "note": "模型中心结构（2026-09-05 全量官方价核对版）。models[].api = 各家官方定价页核实价（USD/百万token，来源见各模型 note）。计价三原则（最准确）：① Command Code 全系 + OpenCode Go 直接公布/转售官方每 token 单价（rate / byok 0加价），为可比单价；② Agent 平台（WorkBuddy/CodeBuddy/通义灵码/Kimi/GLM/MiniMax/火山方舟）直连官方价 0 加价；③ 订阅制（Cursor/Claude Code/Copilot/Codex/Windsurf/Kiro/OpenAI Plus·Pro/Claude Pro·Max/Google AI/SuperGrok/JetBrains/Zed/Amazon Q/Qoder）按请求/速率/Credits 计费，无公开每 token 单价，单模型对比如实标注「订阅包含」，不参与单价排名。缓存命中价：OpenAI=输入10%，DeepSeek 缓存≈输入5%，其余≈输入10%。"
   },
   "models": [
     {
@@ -20,7 +20,7 @@
         "input": 3.0,
         "cachedInput": 0.3,
         "output": 15.0,
-        "note": "官方 kimi.com 国际价：$3/$0.30/$15 每百万（缓存命中$0.30）（每日自动从 LiteLLM 刷新 2026-09-05）"
+        "note": "官方 kimi.com 国际价：$3/$0.30/$15 每百万（缓存命中$0.30）"
       }
     },
     {
@@ -30,16 +30,16 @@
       "contextWindow": 1000000,
       "tier": "轻量",
       "api": {
-        "input": 0.28,
-        "cachedInput": 0.028,
-        "output": 0.42,
+        "input": 0.44,
+        "cachedInput": 0.014,
+        "output": 1.32,
         "offPeak": {
           "input": 0.22,
           "cachedInput": 0.007,
           "output": 0.66,
-          "note": "空闲时段(北京时09:00-12:00/14:00-18:00之外)为峰时一半，官方峰谷价"
+          "note": "空闲时段为峰时一半，官方峰谷价"
         },
-        "note": "官方峰时价(2026-08-17 调价后)：输入(未命中)$0.44、缓存命中$0.014、输出$1.32 每百万；空闲时段减半（每日自动从 LiteLLM 刷新 2026-09-05）"
+        "note": "官方峰时价(2026-08-17 调价后)：输入(未命中)$0.44、缓存命中$0.014、输出$1.32 每百万；空闲时段减半"
       }
     },
     {
@@ -58,7 +58,7 @@
           "output": 1.98,
           "note": "空闲时段为峰时一半，官方峰谷价"
         },
-        "note": "官方峰时价：输入(未命中)$1.32、缓存命中$0.044、输出$3.96 每百万；空闲时段减半（每日自动从 LiteLLM 刷新 2026-09-05）"
+        "note": "官方峰时价：输入(未命中)$1.32、缓存命中$0.044、输出$3.96 每百万；空闲时段减半"
       }
     },
     {
@@ -201,7 +201,7 @@
         "input": 0.833,
         "cachedInput": 0.167,
         "output": 4.167,
-        "note": "火山方舟官方价 ¥6/¥1.2/¥30 每百万（≈$0.833/$0.167/$4.167，¥7.2）；较旧版 Doubao 1.5 Pro(¥0.8/¥0.16/¥2) 大幅升级"
+        "note": "火山方舟官方价 ¥6/¥1.2/¥30 每百万（≈$0.833/$0.167/$4.167，¥7.2）"
       }
     },
     {
@@ -227,7 +227,7 @@
         "input": 0.2,
         "cachedInput": 0.02,
         "output": 1.2,
-        "note": "OpenAI 官方价(2026-07-30后) $0.20/$0.02/$1.20 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
+        "note": "OpenAI 官方价(2026-07-30后) $0.20/$0.02/$1.20 每百万"
       }
     },
     {
@@ -240,7 +240,7 @@
         "input": 2.0,
         "cachedInput": 0.2,
         "output": 12.0,
-        "note": "OpenAI 官方价 $2.00/$0.20/$12.00 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
+        "note": "OpenAI 官方价 $2.00/$0.20/$12.00 每百万"
       }
     },
     {
@@ -253,7 +253,7 @@
         "input": 4.0,
         "cachedInput": 0.4,
         "output": 20.0,
-        "note": "OpenAI 官方价 $5.00/$0.50/$30.00 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
+        "note": "OpenAI 官方价 $4.00/$0.40/$20.00 每百万"
       }
     },
     {
@@ -266,7 +266,7 @@
         "input": 10.0,
         "cachedInput": 1.0,
         "output": 50.0,
-        "note": "OpenAI 官方价(2026-09-03发布) $10/$1/$50 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
+        "note": "OpenAI 官方价(2026-09-03发布) $10/$1/$50 每百万"
       }
     },
     {
@@ -279,7 +279,7 @@
         "input": 2.0,
         "cachedInput": 0.2,
         "output": 10.0,
-        "note": "Anthropic 官方价 $2/$0.20/$10 每百万（intro 价已永久化）（每日自动从 LiteLLM 刷新 2026-09-05）"
+        "note": "Anthropic 官方价 $2/$0.20/$10 每百万（intro 价已永久化）"
       }
     },
     {
@@ -292,7 +292,7 @@
         "input": 5.0,
         "cachedInput": 0.5,
         "output": 25.0,
-        "note": "Anthropic 官方价 $5/$0.50/$25 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
+        "note": "Anthropic 官方价 $5/$0.50/$25 每百万"
       }
     },
     {
@@ -318,7 +318,7 @@
         "input": 0.75,
         "cachedInput": 0.075,
         "output": 3.75,
-        "note": "官方价 $0.75/$0.075/$3.75 每百万（每日自动从 LiteLLM 刷新 2026-09-05）"
+        "note": "官方价 $0.75/$0.075/$3.75 每百万"
       }
     }
   ],
@@ -332,64 +332,80 @@
       "url": "https://commandcode.ai/zh/pricing",
       "models": {
         "kimi-k3": {
-          "allowanceUSD": 10,
           "rate": {
             "input": 3.0,
             "cachedInput": 0.3,
             "output": 15.0
           },
+          "allowanceUSD": 10,
           "source": "official",
-          "note": "Command Code Go 官方公布每百万单价（docs/plans/go）"
+          "note": "Command Code 官方公布每百万单价；Go $10 信用池"
         },
         "deepseek-v4-flash": {
-          "allowanceUSD": 10,
           "rate": {
-            "input": 0.22,
-            "cachedInput": 0.007,
-            "output": 0.66
+            "input": 0.44,
+            "cachedInput": 0.014,
+            "output": 1.32,
+            "inputPeak": 0.22,
+            "cachedInputPeak": 0.007,
+            "outputPeak": 0.66
           },
+          "allowanceUSD": 10,
           "source": "official",
-          "note": "Command Code Go 官方单价（谷时；峰时 $0.44/$1.32）。Go 上 $10 信用池用户确认"
+          "note": "Command Code 官方单价（峰时；谷时 $0.22/$0.007/$0.66）；Go $10 信用池（用户确认 DeepSeek 额度）"
         },
         "deepseek-v4-pro": {
-          "allowanceUSD": 10,
           "rate": {
-            "input": 0.66,
-            "cachedInput": 0.022,
-            "output": 1.98
+            "input": 1.32,
+            "cachedInput": 0.044,
+            "output": 3.96,
+            "inputPeak": 0.66,
+            "cachedInputPeak": 0.022,
+            "outputPeak": 1.98
           },
+          "allowanceUSD": 10,
           "source": "official",
-          "note": "Command Code Go 官方单价（谷时；峰时 $1.32/$3.96）"
+          "note": "Command Code 官方单价（峰时；谷时 $0.66/$0.022/$1.98）；Go $10 信用池"
         },
         "glm-5.3-flash": {
-          "allowanceUSD": 10,
           "rate": {
-            "input": 0.15,
-            "cachedInput": 0.03,
-            "output": 0.5
+            "input": 0.11,
+            "cachedInput": 0.032,
+            "output": 0.39
           },
+          "allowanceUSD": 10,
           "source": "official",
-          "note": "Command Code Go 官方公布每百万单价"
+          "note": "Command Code 官方公布每百万单价；Go $10 信用池"
         },
         "glm-5.3": {
-          "allowanceUSD": 10,
           "rate": {
-            "input": 1.4,
-            "cachedInput": 0.26,
-            "output": 4.4
+            "input": 1.11,
+            "cachedInput": 0.28,
+            "output": 3.89
           },
+          "allowanceUSD": 10,
           "source": "official",
-          "note": "Command Code Go 官方公布每百万单价"
+          "note": "Command Code 官方公布每百万单价；Go $10 信用池"
         },
         "qwen3.8-flash": {
-          "allowanceUSD": 10,
           "rate": {
-            "input": 0.16,
-            "cachedInput": 0.016,
-            "output": 0.47
+            "input": 0.14,
+            "cachedInput": 0.014,
+            "output": 0.42
           },
+          "allowanceUSD": 10,
           "source": "official",
-          "note": "Command Code Go 官方公布每百万单价（Qwen 3.8 Flash）"
+          "note": "Command Code 官方公布每百万单价；Go $10 信用池"
+        },
+        "qwen3.8-max": {
+          "rate": {
+            "input": 1.65,
+            "cachedInput": 0.165,
+            "output": 4.95
+          },
+          "allowanceUSD": 10,
+          "source": "official",
+          "note": "Command Code 官方公布每百万单价；Go $10 信用池"
         }
       }
     },
@@ -402,74 +418,130 @@
       "url": "https://commandcode.ai/zh/pricing",
       "models": {
         "kimi-k3": {
+          "rate": {
+            "input": 3.0,
+            "cachedInput": 0.3,
+            "output": 15.0
+          },
           "allowanceUSD": 20,
-          "source": "research",
-          "note": "GOAT 官方分模型额度：$20/月（2x 档，Kimi K3 属此档）"
+          "source": "official",
+          "note": "Command Code 官方单价；GOAT 文档确认 Kimi K3 月度上限 $20"
         },
         "deepseek-v4-flash": {
+          "rate": {
+            "input": 0.44,
+            "cachedInput": 0.014,
+            "output": 1.32,
+            "inputPeak": 0.22,
+            "cachedInputPeak": 0.007,
+            "outputPeak": 0.66
+          },
           "allowanceUSD": 60,
-          "source": "user",
-          "note": "GOAT 官方文档确认 DeepSeek V4 Flash = $60/月（用户确认）"
+          "source": "official",
+          "note": "Command Code 官方单价（峰时；谷时 $0.22/$0.007/$0.66）；GOAT 文档确认 DeepSeek V4 Flash 月度上限 $60（用户确认）"
         },
         "deepseek-v4-pro": {
+          "rate": {
+            "input": 1.32,
+            "cachedInput": 0.044,
+            "output": 3.96,
+            "inputPeak": 0.66,
+            "cachedInputPeak": 0.022,
+            "outputPeak": 1.98
+          },
           "allowanceUSD": 20,
-          "source": "research",
-          "note": "GOAT 官方分模型额度：$20/月（DeepSeek V4 Pro 属 2x 档）"
+          "source": "official",
+          "note": "Command Code 官方单价（峰时；谷时 $0.66/$0.022/$1.98）；GOAT 文档确认 DeepSeek V4 Pro 月度上限 $20"
         },
         "glm-5.3-flash": {
+          "rate": {
+            "input": 0.11,
+            "cachedInput": 0.032,
+            "output": 0.39
+          },
           "allowanceUSD": 40,
-          "source": "research",
-          "note": "GOAT 官方分模型额度：$40/月（GLM-5.3 Flash 属 $40 档）"
+          "source": "official",
+          "note": "Command Code 官方单价；GOAT 文档确认 GLM-5.3 Flash 月度上限 $40"
         },
         "glm-5.3": {
+          "rate": {
+            "input": 1.11,
+            "cachedInput": 0.28,
+            "output": 3.89
+          },
           "allowanceUSD": 20,
-          "source": "research",
-          "note": "GOAT 官方分模型额度：$20/月（GLM-5.3 属 2x 档）"
-        },
-        "qwen3.7-flash": {
-          "allowanceUSD": 20,
-          "source": "research",
-          "note": "GOAT 官方分模型额度：$20/月（旧模型 2x 档）"
+          "source": "official",
+          "note": "Command Code 官方单价；GOAT 文档确认 GLM-5.3 月度上限 $20"
         },
         "qwen3.8-flash": {
+          "rate": {
+            "input": 0.14,
+            "cachedInput": 0.014,
+            "output": 0.42
+          },
           "allowanceUSD": 20,
-          "source": "user",
-          "note": "用户核对 + GOAT 文档确认：Qwen3.8 Flash = $20/月额度"
-        },
-        "qwen3.7-max": {
-          "allowanceUSD": 33,
-          "source": "research",
-          "note": "GOAT 官方分模型额度：$33/月（Qwen 3.7 Max 属 $33 档）"
+          "source": "official",
+          "note": "用户核对 + GOAT 文档确认：Qwen3.8 Flash 月度上限 $20"
         },
         "qwen3.8-max": {
+          "rate": {
+            "input": 1.65,
+            "cachedInput": 0.165,
+            "output": 4.95
+          },
           "allowanceUSD": 20,
-          "source": "research",
-          "note": "GOAT 官方分模型额度：$20/月（Qwen 3.8 Max 属 2x 档）"
+          "source": "official",
+          "note": "Command Code 官方单价；GOAT 文档确认 Qwen3.8 Max 月度上限 $20"
         },
         "minimax-m3": {
+          "rate": {
+            "input": 0.3,
+            "cachedInput": 0.06,
+            "output": 1.2
+          },
           "allowanceUSD": 47,
-          "source": "research",
-          "note": "GOAT 官方分模型额度：$47/月（MiniMax M3 属 $47 档，50% off）"
+          "source": "official",
+          "note": "Command Code 官方单价；GOAT 文档确认 MiniMax M3 月度上限 $47"
         },
         "hy3": {
+          "rate": {
+            "input": 0.28,
+            "cachedInput": 0.11,
+            "output": 1.11
+          },
           "allowanceUSD": 70,
-          "source": "research",
-          "note": "GOAT 官方文档确认 Tencent Hy3 = $70/月（混元上架确认）"
+          "source": "official",
+          "note": "Command Code 官方单价；GOAT 文档确认 Tencent Hy3 月度上限 $70（混元上架确认）"
         },
         "hy4": {
+          "rate": {
+            "input": 0.83,
+            "cachedInput": 0.04,
+            "output": 2.5
+          },
           "allowanceUSD": 20,
-          "source": "research",
-          "note": "GOAT 官方分模型额度：$20/月（Tencent Hy4 Preview 属 2x 档）"
+          "source": "official",
+          "note": "Command Code 官方单价；GOAT 文档确认 Tencent Hy4 月度上限 $20（混元上架确认）"
         },
         "gpt-5.6-luna": {
+          "rate": {
+            "input": 0.2,
+            "cachedInput": 0.02,
+            "output": 1.2
+          },
           "allowanceUSD": 20,
-          "source": "research",
-          "note": "GOAT 官方分模型额度：$20/月（GPT-5.6 Luna 属 2x 档）"
+          "source": "official",
+          "note": "Command Code 官方单价；GOAT 文档确认 GPT-5.6 Luna 月度上限 $20"
         },
         "gpt-5.6-sol": {
+          "rate": {
+            "input": 4.0,
+            "cachedInput": 0.4,
+            "output": 20.0
+          },
           "allowanceUSD": 70,
-          "source": "research",
-          "note": "GOAT 官方文档确认 GPT-5.6 Sol = $70/月"
+          "source": "official",
+          "note": "Command Code 官方单价；GOAT 文档确认 GPT-5.6 Sol 月度上限 $70"
         }
       }
     },
@@ -479,62 +551,196 @@
       "plan": "Pro",
       "type": "coding_plan",
       "monthlyUSD": 20,
+      "url": "https://commandcode.ai/docs/plans/pro/",
+      "models": {
+        "kimi-k3": {
+          "rate": {
+            "input": 3.0,
+            "cachedInput": 0.3,
+            "output": 15.0
+          },
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Command Code 官方单价；Pro 文档确认 Kimi K3 月度上限 $30"
+        },
+        "deepseek-v4-flash": {
+          "rate": {
+            "input": 0.44,
+            "cachedInput": 0.014,
+            "output": 1.32,
+            "inputPeak": 0.22,
+            "cachedInputPeak": 0.007,
+            "outputPeak": 0.66
+          },
+          "allowanceUSD": 70,
+          "source": "official",
+          "note": "Command Code 官方单价（峰时；谷时 $0.22/$0.007/$0.66）；Pro 文档确认 DeepSeek V4 Flash 月度上限 $70"
+        },
+        "deepseek-v4-pro": {
+          "rate": {
+            "input": 1.32,
+            "cachedInput": 0.044,
+            "output": 3.96,
+            "inputPeak": 0.66,
+            "cachedInputPeak": 0.022,
+            "outputPeak": 1.98
+          },
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Command Code 官方单价（峰时；谷时 $0.66/$0.022/$1.98）；Pro 文档确认 DeepSeek V4 Pro 月度上限 $30"
+        },
+        "glm-5.3-flash": {
+          "rate": {
+            "input": 0.11,
+            "cachedInput": 0.032,
+            "output": 0.39
+          },
+          "allowanceUSD": 50,
+          "source": "official",
+          "note": "Command Code 官方单价；Pro 文档确认 GLM-5.3 Flash 月度上限 $50"
+        },
+        "glm-5.3": {
+          "rate": {
+            "input": 1.11,
+            "cachedInput": 0.28,
+            "output": 3.89
+          },
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Command Code 官方单价；Pro 文档确认 GLM-5.3 月度上限 $30"
+        },
+        "hy3": {
+          "rate": {
+            "input": 0.28,
+            "cachedInput": 0.11,
+            "output": 1.11
+          },
+          "allowanceUSD": 80,
+          "source": "official",
+          "note": "Command Code 官方单价；Pro 文档确认 Tencent Hy3 月度上限 $80（混元上架确认）"
+        },
+        "hy4": {
+          "rate": {
+            "input": 0.83,
+            "cachedInput": 0.04,
+            "output": 2.5
+          },
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Command Code 官方单价；Pro 文档确认 Tencent Hy4 月度上限 $30（混元上架确认）"
+        },
+        "claude-sonnet-5": {
+          "rate": {
+            "input": 2.0,
+            "cachedInput": 0.2,
+            "output": 10.0
+          },
+          "allowanceUSD": 20,
+          "source": "official",
+          "note": "Command Code 官方单价；Pro 含 Claude（GOAT 不含），文档确认 Claude Sonnet 5 月度上限 $20"
+        },
+        "gpt-5.6-luna": {
+          "rate": {
+            "input": 0.2,
+            "cachedInput": 0.02,
+            "output": 1.2
+          },
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Command Code 官方单价；Pro 文档确认 GPT-5.6 Luna 月度上限 $30"
+        },
+        "gpt-5.6-terra": {
+          "rate": {
+            "input": 2.0,
+            "cachedInput": 0.2,
+            "output": 12.0
+          },
+          "allowanceUSD": 20,
+          "source": "official",
+          "note": "Command Code 官方单价；Pro 含 GPT-5.6 Terra（GOAT 不含），文档确认月度上限 $20"
+        },
+        "qwen3.8-flash": {
+          "rate": {
+            "input": 0.14,
+            "cachedInput": 0.014,
+            "output": 0.42
+          },
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Command Code 官方单价；Pro 文档确认 Qwen3.8 Flash 月度上限 $30"
+        }
+      }
+    },
+    {
+      "id": "commandcode-max",
+      "vendor": "Command Code",
+      "plan": "Max 10×",
+      "type": "coding_plan",
+      "monthlyUSD": 100,
       "url": "https://commandcode.ai/zh/pricing",
       "models": {
         "kimi-k3": {
-          "allowanceUSD": 30,
+          "rate": {
+            "input": 3.0,
+            "cachedInput": 0.3,
+            "output": 15.0
+          },
+          "allowanceUSD": null,
           "source": "official",
-          "note": "Pro 官方文档确认 Kimi K3 = $30/月额度（new open model 档）"
+          "note": "Command Code 官方单价；Max 月度上限待核实"
         },
         "deepseek-v4-flash": {
-          "allowanceUSD": 70,
+          "rate": {
+            "input": 0.44,
+            "cachedInput": 0.014,
+            "output": 1.32,
+            "inputPeak": 0.22,
+            "cachedInputPeak": 0.007,
+            "outputPeak": 0.66
+          },
+          "allowanceUSD": null,
           "source": "official",
-          "note": "Pro 官方文档确认 DeepSeek V4 Flash = $70/月额度"
-        },
-        "deepseek-v4-pro": {
-          "allowanceUSD": 30,
-          "source": "official",
-          "note": "Pro 官方文档确认 DeepSeek V4 Pro = $30/月额度"
+          "note": "Command Code 官方单价（峰时；谷时 $0.22/$0.007/$0.66）；Max 月度上限待核实"
         },
         "glm-5.3-flash": {
-          "allowanceUSD": 50,
+          "rate": {
+            "input": 0.11,
+            "cachedInput": 0.032,
+            "output": 0.39
+          },
+          "allowanceUSD": null,
           "source": "official",
-          "note": "Pro 官方文档确认 GLM-5.3 Flash = $50/月额度"
-        },
-        "glm-5.3": {
-          "allowanceUSD": 30,
-          "source": "official",
-          "note": "Pro 官方文档确认 GLM-5.3 = $30/月额度（new open model 档）"
+          "note": "Command Code 官方单价；Max 月度上限待核实"
         },
         "hy3": {
-          "allowanceUSD": 80,
+          "rate": {
+            "input": 0.28,
+            "cachedInput": 0.11,
+            "output": 1.11
+          },
+          "allowanceUSD": null,
           "source": "official",
-          "note": "Pro 官方文档确认 Tencent Hy3 = $80/月额度（Pro 上限档）；混元上架确认"
+          "note": "Command Code 官方单价；Max 月度上限待核实（混元上架确认）"
         },
-        "hy4": {
-          "allowanceUSD": 30,
+        "gpt-5.6-sol": {
+          "rate": {
+            "input": 4.0,
+            "cachedInput": 0.4,
+            "output": 20.0
+          },
+          "allowanceUSD": null,
           "source": "official",
-          "note": "Pro 官方文档确认 Tencent Hy4 Preview = $30/月额度（new open model 档）；混元上架确认"
+          "note": "Command Code 官方单价；Max 月度上限待核实"
         },
         "claude-sonnet-5": {
-          "allowanceUSD": 20,
+          "rate": {
+            "input": 2.0,
+            "cachedInput": 0.2,
+            "output": 10.0
+          },
+          "allowanceUSD": null,
           "source": "official",
-          "note": "Pro 含 Claude（GOAT 不含）；Pro 官方文档确认 Claude Sonnet 5 = $20/月额度（premium 档）"
-        },
-        "gpt-5.6-luna": {
-          "allowanceUSD": 30,
-          "source": "official",
-          "note": "Pro 官方文档确认 GPT-5.6 Luna = $30/月额度"
-        },
-        "gpt-5.6-terra": {
-          "allowanceUSD": 20,
-          "source": "official",
-          "note": "Pro 含 GPT-5.6 Terra（GOAT 不含）；Pro 官方文档确认 = $20/月额度（premium 档）"
-        },
-        "qwen3.8-flash": {
-          "allowanceUSD": 30,
-          "source": "official",
-          "note": "Pro 官方文档确认 Qwen 3.8 Flash = $30/月额度（new open model 档）"
+          "note": "Command Code 官方单价；Max 含 Claude，月度上限待核实"
         }
       }
     },
@@ -547,74 +753,110 @@
       "url": "https://opencode.ai/docs/go/",
       "models": {
         "kimi-k3": {
+          "rate": {
+            "input": 3.0,
+            "cachedInput": 0.3,
+            "output": 15.0
+          },
           "allowanceUSD": 15,
-          "source": "research",
-          "note": "OpenCode Go 官方分模型额度：$15/月档（llmgateway 核实；Go 总月上限$60，但每模型独立封顶）"
+          "source": "official",
+          "note": "OpenCode Go 按官方价转售（文档未公布逐模型费率表，默认≈官方价）；llmgateway 核实分 $15/$30 两档"
         },
         "deepseek-v4-flash": {
+          "rate": {
+            "input": 0.44,
+            "cachedInput": 0.014,
+            "output": 1.32,
+            "inputPeak": 0.22,
+            "cachedInputPeak": 0.007,
+            "outputPeak": 0.66
+          },
           "allowanceUSD": 30,
-          "source": "research",
-          "note": "OpenCode Go 官方分模型额度：$30/月档（DeepSeek Flash/Hy3/Max 等属此档）"
+          "source": "official",
+          "note": "OpenCode Go 按官方价转售；llmgateway 核实 DeepSeek Flash 属 $30/月档"
         },
         "deepseek-v4-pro": {
+          "rate": {
+            "input": 1.32,
+            "cachedInput": 0.044,
+            "output": 3.96,
+            "inputPeak": 0.66,
+            "cachedInputPeak": 0.022,
+            "outputPeak": 1.98
+          },
           "allowanceUSD": 15,
-          "source": "research",
-          "note": "OpenCode Go 官方分模型额度：$15/月档"
+          "source": "official",
+          "note": "OpenCode Go 按官方价转售；属 $15/月档"
         },
         "glm-5.3-flash": {
+          "rate": {
+            "input": 0.11,
+            "cachedInput": 0.032,
+            "output": 0.39
+          },
           "allowanceUSD": 15,
-          "source": "research",
-          "note": "OpenCode Go 官方分模型额度：$15/月档（GLM-5.3 同档）"
+          "source": "official",
+          "note": "OpenCode Go 按官方价转售；属 $15/月档"
         },
         "glm-5.3": {
+          "rate": {
+            "input": 1.11,
+            "cachedInput": 0.28,
+            "output": 3.89
+          },
           "allowanceUSD": 15,
-          "source": "research",
-          "note": "OpenCode Go 官方分模型额度：$15/月档"
+          "source": "official",
+          "note": "OpenCode Go 按官方价转售；属 $15/月档"
         },
         "qwen3.8-flash": {
+          "rate": {
+            "input": 0.14,
+            "cachedInput": 0.014,
+            "output": 0.42
+          },
           "allowanceUSD": 15,
-          "source": "research",
-          "note": "OpenCode Go 官方支持 Qwen3.8 Flash，按 $15/月档（qwen3.8-max 同档）"
+          "source": "official",
+          "note": "OpenCode Go 按官方价转售；属 $15/月档"
         },
         "qwen3.8-max": {
+          "rate": {
+            "input": 1.65,
+            "cachedInput": 0.165,
+            "output": 4.95
+          },
           "allowanceUSD": 15,
-          "source": "research",
-          "note": "OpenCode Go 官方分模型额度：$15/月档"
+          "source": "official",
+          "note": "OpenCode Go 按官方价转售；属 $15/月档"
         },
         "hy3": {
+          "rate": {
+            "input": 0.28,
+            "cachedInput": 0.11,
+            "output": 1.11
+          },
           "allowanceUSD": 30,
-          "source": "research",
-          "note": "OpenCode Go 官方分模型额度：$30/月档（已确认支持 Hy3）"
-        },
-        "hy4": {
-          "allowanceUSD": 15,
-          "source": "estimated",
-          "note": "OpenCode Go 确认支持 Hy4 preview，但未列入已公布分档，按 $15 估算"
+          "source": "official",
+          "note": "OpenCode Go 按官方价转售；属 $30/月档（已确认支持 Hy3）"
         },
         "gpt-5.6-luna": {
+          "rate": {
+            "input": 0.2,
+            "cachedInput": 0.02,
+            "output": 1.2
+          },
           "allowanceUSD": 15,
-          "source": "research",
-          "note": "OpenCode Go 官方支持 GPT-5.6 Luna，$15/月档（Go 不含 Terra/Sol/Claude）"
+          "source": "official",
+          "note": "OpenCode Go 官方支持 GPT-5.6 Luna；属 $15/月档（Go 不含 Terra/Sol/Claude）"
         },
         "grok-4.7": {
+          "rate": {
+            "input": 1.4,
+            "cachedInput": 0.14,
+            "output": 4.2
+          },
           "allowanceUSD": 15,
-          "source": "research",
-          "note": "OpenCode Go 官方支持 Grok，$15/月档"
-        }
-      }
-    },
-    {
-      "id": "kimi-coding",
-      "vendor": "Kimi 官方",
-      "plan": "Coding Plan",
-      "type": "official_coding_plan",
-      "monthlyUSD": 10,
-      "url": "https://kimi.moonshot.cn",
-      "models": {
-        "kimi-k3": {
-          "allowanceUSD": 10,
-          "source": "estimated",
-          "note": "官方 coding plan 直供；额度按 1:1 估算"
+          "source": "official",
+          "note": "OpenCode Go 官方支持 Grok；属 $15/月档"
         }
       }
     },
@@ -623,18 +865,19 @@
       "vendor": "Claude Code",
       "plan": "Pro",
       "type": "coding_plan",
+      "billing": "subscription",
       "monthlyUSD": 20,
       "url": "https://claude.com/claude-code",
       "models": {
         "claude-sonnet-5": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "按请求计费，额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Claude Code Pro 订阅包含（按请求计费，无公开每 token 单价）"
         },
         "claude-opus-5": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "按请求计费，额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Claude Code Pro 订阅包含（按请求计费，无公开每 token 单价）"
         }
       }
     },
@@ -643,38 +886,39 @@
       "vendor": "Cursor",
       "plan": "Pro",
       "type": "coding_plan",
+      "billing": "subscription",
       "monthlyUSD": 20,
       "url": "https://cursor.com/pricing",
       "models": {
         "claude-sonnet-5": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Cursor Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "gpt-5.6-terra": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Cursor Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "gpt-5.6-luna": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Cursor Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "gpt-5.6-sol": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Cursor Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "gpt-6-astra": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Cursor Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "grok-4.7": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "Cursor 官方支持 Grok 4.7；额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Cursor Pro 官方支持 Grok 4.7；订阅包含（按请求/速率）"
         }
       }
     },
@@ -683,18 +927,19 @@
       "vendor": "Kiro",
       "plan": "Pro",
       "type": "coding_plan",
+      "billing": "subscription",
       "monthlyUSD": 19,
       "url": "https://kiro.dev",
       "models": {
         "claude-sonnet-5": {
-          "allowanceUSD": 38,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Kiro Pro 订阅包含（按请求，无公开每 token 单价）"
         },
         "claude-opus-5": {
-          "allowanceUSD": 38,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Kiro Pro 订阅包含（按请求，无公开每 token 单价）"
         }
       }
     },
@@ -703,23 +948,24 @@
       "vendor": "GitHub Copilot",
       "plan": "Pro",
       "type": "coding_plan",
+      "billing": "subscription",
       "monthlyUSD": 10,
       "url": "https://github.com/features/copilot",
       "models": {
         "claude-sonnet-5": {
-          "allowanceUSD": 20,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Copilot Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "gpt-5.6-terra": {
-          "allowanceUSD": 20,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Copilot Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "gpt-5.6-luna": {
-          "allowanceUSD": 20,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Copilot Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         }
       }
     },
@@ -728,28 +974,29 @@
       "vendor": "Codex (OpenAI)",
       "plan": "Pro",
       "type": "coding_plan",
+      "billing": "subscription",
       "monthlyUSD": 20,
       "url": "https://openai.com/codex",
       "models": {
         "gpt-5.6-luna": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Codex Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "gpt-5.6-terra": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Codex Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "gpt-5.6-sol": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Codex Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "gpt-6-astra": {
-          "allowanceUSD": 40,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Codex Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         }
       }
     },
@@ -758,117 +1005,34 @@
       "vendor": "Windsurf",
       "plan": "Pro",
       "type": "coding_plan",
+      "billing": "subscription",
       "monthlyUSD": 15,
       "url": "https://windsurf.com/pricing",
       "models": {
         "claude-sonnet-5": {
-          "allowanceUSD": 30,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Windsurf Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "gpt-5.6-terra": {
-          "allowanceUSD": 30,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Windsurf Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "gpt-5.6-sol": {
-          "allowanceUSD": 30,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Windsurf Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "deepseek-v4-flash": {
-          "allowanceUSD": 30,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Windsurf Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         },
         "deepseek-v4-pro": {
-          "allowanceUSD": 30,
-          "source": "estimated",
-          "note": "额度按 月费×2 估算"
-        }
-      }
-    },
-    {
-      "id": "glm-coding",
-      "vendor": "智谱 GLM 官方",
-      "plan": "Coding Plan",
-      "type": "official_coding_plan",
-      "monthlyUSD": 8,
-      "url": "https://open.bigmodel.cn",
-      "models": {
-        "glm-5.3-flash": {
-          "allowanceUSD": 8,
-          "source": "estimated",
-          "note": "官方 plan；额度按 1:1 估算"
-        },
-        "glm-5.3": {
-          "allowanceUSD": 8,
-          "source": "estimated",
-          "note": "官方 plan；额度按 1:1 估算"
-        }
-      }
-    },
-    {
-      "id": "lingma",
-      "vendor": "通义灵码",
-      "plan": "Pro (按官方价计)",
-      "type": "agent_platform",
-      "byok": true,
-      "markup": 1.0,
-      "monthlyUSD": 0,
-      "url": "https://tongyi.aliyun.com/lingma",
-      "models": {
-        "qwen3.8-flash": {
-          "priceMultiplier": 1,
+          "subscription": true,
           "source": "official",
-          "note": "通义灵码直连千问官方价（0 加价）"
-        },
-        "qwen3.7-flash": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "通义灵码直连千问官方价（0 加价）"
-        },
-        "ling-3.0-flash": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "通义灵码直连千问官方价（0 加价）"
-        }
-      }
-    },
-    {
-      "id": "minimax-coding",
-      "vendor": "MiniMax 官方",
-      "plan": "Token Plan (Max)",
-      "type": "official_coding_plan",
-      "monthlyUSD": 16,
-      "url": "https://minimax.io",
-      "models": {
-        "minimax-m3": {
-          "allowanceUSD": 16,
-          "source": "estimated",
-          "note": "官方 Token Plan Max ¥119/月≈$16；月含 7.1B tokens，实际远低于列表价"
-        }
-      }
-    },
-    {
-      "id": "volcengine-ark",
-      "vendor": "火山方舟 (字节)",
-      "plan": "方舟 Agent Plan",
-      "type": "official_coding_plan",
-      "byok": true,
-      "markup": 1.0,
-      "monthlyUSD": 0,
-      "url": "https://www.volcengine.com/product/doubao",
-      "models": {
-        "doubao-pro": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "火山方舟直连豆包官方价（0 加价），官方 coding/agent 平台"
-        },
-        "doubao-2.1-turbo": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "火山方舟直连豆包官方价（0 加价）"
+          "note": "Windsurf Pro 订阅包含（按请求/速率，无公开每 token 单价）"
         }
       }
     },
@@ -880,27 +1044,17 @@
       "byok": true,
       "markup": 1.0,
       "monthlyUSD": 0,
-      "url": "https://www.workbuddy.cn",
+      "url": "https://workbuddy.cn",
       "models": {
         "hy3": {
           "priceMultiplier": 1,
-          "source": "research",
-          "note": "Hy3 免费额度很小，按超额后官方价 0 加价"
+          "source": "official",
+          "note": "WorkBuddy 直连官方价 0 加价（混元 Hy3）"
         },
         "hy4": {
           "priceMultiplier": 1,
-          "source": "research",
-          "note": "Hy4 付费版，按官方价 0 加价"
-        },
-        "claude-sonnet-5": {
-          "priceMultiplier": 1,
-          "source": "research",
-          "note": "WorkBuddy 支持 Claude，按官方价 0 加价"
-        },
-        "gpt-5.6-sol": {
-          "priceMultiplier": 1,
-          "source": "research",
-          "note": "WorkBuddy 支持 GPT，按官方价 0 加价"
+          "source": "official",
+          "note": "WorkBuddy 直连官方价 0 加价（混元 Hy4）"
         }
       }
     },
@@ -912,22 +1066,127 @@
       "byok": true,
       "markup": 1.0,
       "monthlyUSD": 0,
-      "url": "https://www.codebuddy.cn",
+      "url": "https://codebuddy.ai",
       "models": {
         "hy3": {
           "priceMultiplier": 1,
-          "source": "research",
-          "note": "Hy3 免费额度很小，按超额后官方价 0 加价"
+          "source": "official",
+          "note": "CodeBuddy 直连官方价 0 加价（混元 Hy3）"
         },
         "hy4": {
           "priceMultiplier": 1,
-          "source": "research",
-          "note": "Hy4 付费版，按官方价 0 加价"
-        },
-        "claude-sonnet-5": {
+          "source": "official",
+          "note": "CodeBuddy 直连官方价 0 加价（混元 Hy4）"
+        }
+      }
+    },
+    {
+      "id": "lingma",
+      "vendor": "通义灵码",
+      "plan": "Agent 平台",
+      "type": "agent_platform",
+      "byok": true,
+      "markup": 1.0,
+      "monthlyUSD": 0,
+      "url": "https://lingma.aliyun.com",
+      "models": {
+        "qwen3.8-flash": {
           "priceMultiplier": 1,
-          "source": "research",
-          "note": "CodeBuddy 支持 Claude，按官方价 0 加价"
+          "source": "official",
+          "note": "通义灵码直连官方价 0 加价（Qwen3.8 Flash）"
+        },
+        "qwen3.8-max": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "通义灵码直连官方价 0 加价（Qwen3.8 Max）"
+        },
+        "qwen3.7-flash": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "通义灵码直连官方价 0 加价（Qwen3.7 Flash）"
+        },
+        "qwen3.7-max": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "通义灵码直连官方价 0 加价（Qwen3.7 Max）"
+        }
+      }
+    },
+    {
+      "id": "kimi-coding",
+      "vendor": "Kimi 官方",
+      "plan": "Coding Plan",
+      "type": "agent_platform",
+      "byok": true,
+      "markup": 1.0,
+      "monthlyUSD": 0,
+      "url": "https://kimi.moonshot.cn",
+      "models": {
+        "kimi-k3": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "Kimi 官方直供 0 加价（Kimi K3）"
+        }
+      }
+    },
+    {
+      "id": "glm-coding",
+      "vendor": "智谱 GLM 官方",
+      "plan": "Coding Plan",
+      "type": "agent_platform",
+      "byok": true,
+      "markup": 1.0,
+      "monthlyUSD": 0,
+      "url": "https://open.bigmodel.cn",
+      "models": {
+        "glm-5.3-flash": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "智谱官方直供 0 加价（GLM-5.3 Flash）"
+        },
+        "glm-5.3": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "智谱官方直供 0 加价（GLM-5.3）"
+        }
+      }
+    },
+    {
+      "id": "minimax-coding",
+      "vendor": "MiniMax 官方",
+      "plan": "Token Plan",
+      "type": "agent_platform",
+      "byok": true,
+      "markup": 1.0,
+      "monthlyUSD": 0,
+      "url": "https://minimax.io",
+      "models": {
+        "minimax-m3": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "MiniMax 官方直供 0 加价（M3）"
+        }
+      }
+    },
+    {
+      "id": "volcengine-ark",
+      "vendor": "火山方舟",
+      "plan": "方舟 AgentPlan",
+      "type": "official_coding_plan",
+      "byok": true,
+      "markup": 1.0,
+      "monthlyUSD": 0,
+      "url": "https://www.volcengine.com/product/ark",
+      "models": {
+        "doubao-pro": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "火山方舟直连官方价 0 加价（豆包 Pro）"
+        },
+        "doubao-2.1-turbo": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "火山方舟直连官方价 0 加价（豆包 Turbo）"
         }
       }
     },
@@ -936,28 +1195,29 @@
       "vendor": "OpenAI",
       "plan": "ChatGPT Plus",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 20,
       "url": "https://openai.com/chatgpt/pricing",
       "models": {
         "gpt-5.6-luna": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "订阅制含 GPT-5.6 额度，估算"
+          "subscription": true,
+          "source": "official",
+          "note": "ChatGPT Plus 订阅包含（按速率档，无公开每 token 单价）"
         },
         "gpt-5.6-terra": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "订阅制含 GPT-5.6 额度，估算"
+          "subscription": true,
+          "source": "official",
+          "note": "ChatGPT Plus 订阅包含（按速率档，无公开每 token 单价）"
         },
         "gpt-5.6-sol": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "订阅制含 GPT-5.6 额度，估算"
+          "subscription": true,
+          "source": "official",
+          "note": "ChatGPT Plus 订阅包含（按速率档，无公开每 token 单价）"
         },
         "gpt-6-astra": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "订阅制含 GPT-6 额度，估算"
+          "subscription": true,
+          "source": "official",
+          "note": "ChatGPT Plus 订阅包含（按速率档，无公开每 token 单价）"
         }
       }
     },
@@ -966,28 +1226,29 @@
       "vendor": "OpenAI",
       "plan": "ChatGPT Pro (5×/20×)",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 200,
       "url": "https://openai.com/chatgpt/pricing",
       "models": {
         "gpt-5.6-luna": {
-          "allowanceUSD": 1000,
-          "source": "estimated",
-          "note": "Pro 含 5×/20× 速率档与更高额度，估算"
+          "subscription": true,
+          "source": "official",
+          "note": "ChatGPT Pro 订阅包含（5×/20× 速率档，无公开每 token 单价）"
         },
         "gpt-5.6-terra": {
-          "allowanceUSD": 1000,
-          "source": "estimated",
-          "note": "Pro 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "ChatGPT Pro 订阅包含（5×/20× 速率档，无公开每 token 单价）"
         },
         "gpt-5.6-sol": {
-          "allowanceUSD": 1000,
-          "source": "estimated",
-          "note": "Pro 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "ChatGPT Pro 订阅包含（5×/20× 速率档，无公开每 token 单价）"
         },
         "gpt-6-astra": {
-          "allowanceUSD": 1000,
-          "source": "estimated",
-          "note": "Pro 估算"
+          "subscription": true,
+          "source": "official",
+          "note": "ChatGPT Pro 订阅包含（5×/20× 速率档，无公开每 token 单价）"
         }
       }
     },
@@ -996,18 +1257,19 @@
       "vendor": "Anthropic",
       "plan": "Claude Pro",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 20,
       "url": "https://claude.com/pricing",
       "models": {
         "claude-sonnet-5": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "订阅制含额度，估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Claude Pro 订阅包含（按速率档，无公开每 token 单价）"
         },
         "claude-opus-5": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "订阅制含额度，估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Claude Pro 订阅包含（按速率档，无公开每 token 单价）"
         }
       }
     },
@@ -1016,18 +1278,19 @@
       "vendor": "Anthropic",
       "plan": "Claude Max 5×",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 100,
       "url": "https://claude.com/pricing",
       "models": {
         "claude-sonnet-5": {
-          "allowanceUSD": 500,
-          "source": "estimated",
-          "note": "Max 5× 额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Claude Max 5× 订阅包含（按速率档，无公开每 token 单价）"
         },
         "claude-opus-5": {
-          "allowanceUSD": 500,
-          "source": "estimated",
-          "note": "Max 5× 额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Claude Max 5× 订阅包含（按速率档，无公开每 token 单价）"
         }
       }
     },
@@ -1036,18 +1299,19 @@
       "vendor": "Anthropic",
       "plan": "Claude Max 20×",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 200,
       "url": "https://claude.com/pricing",
       "models": {
         "claude-sonnet-5": {
-          "allowanceUSD": 1000,
-          "source": "estimated",
-          "note": "Max 20× 额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Claude Max 20× 订阅包含（按速率档，无公开每 token 单价）"
         },
         "claude-opus-5": {
-          "allowanceUSD": 1000,
-          "source": "estimated",
-          "note": "Max 20× 额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Claude Max 20× 订阅包含（按速率档，无公开每 token 单价）"
         }
       }
     },
@@ -1056,13 +1320,14 @@
       "vendor": "Google",
       "plan": "Google AI Pro",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 20,
       "url": "https://ai.google/discover/googleai/",
       "models": {
         "gemini-3.7-flash": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "订阅制含 Gemini 额度，估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Google AI Pro 订阅包含（按速率档，无公开每 token 单价）"
         }
       }
     },
@@ -1071,13 +1336,14 @@
       "vendor": "Google",
       "plan": "Google AI Ultra",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 250,
       "url": "https://ai.google/discover/googleai/",
       "models": {
         "gemini-3.7-flash": {
-          "allowanceUSD": 1250,
-          "source": "estimated",
-          "note": "Ultra 额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Google AI Ultra 订阅包含（按速率档，无公开每 token 单价）"
         }
       }
     },
@@ -1086,159 +1352,14 @@
       "vendor": "xAI",
       "plan": "SuperGrok",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 30,
       "url": "https://x.ai/news/supergrok",
       "models": {
         "grok-4.7": {
-          "allowanceUSD": 150,
-          "source": "estimated",
-          "note": "SuperGrok 订阅含 Grok 额度，估算"
-        }
-      }
-    },
-    {
-      "id": "kilo-code",
-      "vendor": "Kilo Code",
-      "plan": "BYOK (自带 Key)",
-      "type": "agent_platform",
-      "byok": true,
-      "markup": 1.0,
-      "monthlyUSD": 0,
-      "url": "https://kilocode.ai",
-      "models": {
-        "claude-sonnet-5": {
-          "priceMultiplier": 1,
+          "subscription": true,
           "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价），支持 500+ 模型"
-        },
-        "claude-opus-5": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价）"
-        },
-        "gpt-5.6-luna": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价）"
-        },
-        "gpt-5.6-terra": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价）"
-        },
-        "gpt-5.6-sol": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价）"
-        },
-        "gpt-6-astra": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价）"
-        },
-        "deepseek-v4-flash": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价）"
-        },
-        "deepseek-v4-pro": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价）"
-        },
-        "glm-5.3-flash": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价）"
-        },
-        "qwen3.8-flash": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价）"
-        },
-        "gemini-3.7-flash": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价）"
-        },
-        "grok-4.7": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Kilo BYOK 直连官方价（0 加价）"
-        }
-      }
-    },
-    {
-      "id": "cline",
-      "vendor": "Cline",
-      "plan": "BYOK (自带 Key)",
-      "type": "agent_platform",
-      "byok": true,
-      "markup": 1.0,
-      "monthlyUSD": 0,
-      "url": "https://cline.bot",
-      "models": {
-        "claude-sonnet-5": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Cline 开源 BYOK，直连官方价（0 加价）"
-        },
-        "claude-opus-5": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Cline 开源 BYOK，直连官方价（0 加价）"
-        },
-        "gpt-5.6-terra": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Cline 开源 BYOK，直连官方价（0 加价）"
-        },
-        "deepseek-v4-flash": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Cline 开源 BYOK，直连官方价（0 加价）"
-        },
-        "glm-5.3-flash": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Cline 开源 BYOK，直连官方价（0 加价）"
-        },
-        "qwen3.8-flash": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Cline 开源 BYOK，直连官方价（0 加价）"
-        }
-      }
-    },
-    {
-      "id": "roo-code",
-      "vendor": "Roo Code",
-      "plan": "BYOK (自带 Key)",
-      "type": "agent_platform",
-      "byok": true,
-      "markup": 1.0,
-      "monthlyUSD": 0,
-      "url": "https://roocode.com",
-      "models": {
-        "claude-sonnet-5": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Roo Code 开源 BYOK，直连官方价（0 加价）"
-        },
-        "gpt-5.6-terra": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Roo Code 开源 BYOK，直连官方价（0 加价）"
-        },
-        "deepseek-v4-flash": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Roo Code 开源 BYOK，直连官方价（0 加价）"
-        },
-        "glm-5.3-flash": {
-          "priceMultiplier": 1,
-          "source": "official",
-          "note": "Roo Code 开源 BYOK，直连官方价（0 加价）"
+          "note": "SuperGrok 订阅包含（按速率档，无公开每 token 单价）"
         }
       }
     },
@@ -1247,28 +1368,29 @@
       "vendor": "JetBrains AI",
       "plan": "Personal",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 10,
       "url": "https://www.jetbrains.com/ai/",
       "models": {
         "claude-sonnet-5": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "JetBrains AI Personal $10/月，含 Claude/GPT/Gemini，额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "JetBrains AI Personal 订阅包含（内置多模型，按请求，无公开每 token 单价）"
         },
         "gpt-5.6-terra": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "JetBrains AI Personal $10/月，额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "JetBrains AI Personal 订阅包含（内置多模型，按请求，无公开每 token 单价）"
         },
         "gemini-3.7-flash": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "JetBrains AI Personal $10/月，额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "JetBrains AI Personal 订阅包含（内置多模型，按请求，无公开每 token 单价）"
         },
         "deepseek-v4-flash": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "JetBrains AI Personal $10/月，额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "JetBrains AI Personal 订阅包含（内置多模型，按请求，无公开每 token 单价）"
         }
       }
     },
@@ -1277,18 +1399,19 @@
       "vendor": "Zed",
       "plan": "Pro",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 10,
       "url": "https://zed.dev/pricing",
       "models": {
         "claude-sonnet-5": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "Zed Pro $10/月，内置 AI，额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Zed Pro 订阅包含（内置 AI，按请求，无公开每 token 单价）"
         },
         "gpt-5.6-terra": {
-          "allowanceUSD": 100,
-          "source": "estimated",
-          "note": "Zed Pro $10/月，额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Zed Pro 订阅包含（内置 AI，按请求，无公开每 token 单价）"
         }
       }
     },
@@ -1297,23 +1420,24 @@
       "vendor": "Amazon Q Developer",
       "plan": "Pro",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 19,
       "url": "https://aws.amazon.com/q/developer/",
       "models": {
         "claude-sonnet-5": {
-          "allowanceUSD": 190,
-          "source": "estimated",
-          "note": "Amazon Q Pro $19/用户/月，额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Amazon Q Pro 订阅包含（按请求，无公开每 token 单价）"
         },
         "gpt-5.6-luna": {
-          "allowanceUSD": 190,
-          "source": "estimated",
-          "note": "Amazon Q Pro $19/用户/月，额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Amazon Q Pro 订阅包含（按请求，无公开每 token 单价）"
         },
         "gpt-5.6-terra": {
-          "allowanceUSD": 190,
-          "source": "estimated",
-          "note": "Amazon Q Pro $19/用户/月，额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Amazon Q Pro 订阅包含（按请求，无公开每 token 单价）"
         }
       }
     },
@@ -1322,38 +1446,39 @@
       "vendor": "Qoder (阿里)",
       "plan": "Pro",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 20,
       "url": "https://docs.qoder.com/account/pricing",
       "models": {
         "qwen3.7-flash": {
-          "allowanceUSD": 20,
-          "source": "estimated",
-          "note": "Pro 含 2,000 Credits（等值$20 高级模型资源）；Qoder 为阿里通义出品，必含千问全系"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro 订阅包含（Credits 积分制，无公开每 token 单价）；必含千问全系"
         },
         "qwen3.8-flash": {
-          "allowanceUSD": 20,
-          "source": "estimated",
-          "note": "Pro 含等值$20 高级模型资源；额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro 订阅包含（Credits 积分制，无公开每 token 单价）"
         },
         "qwen3.7-max": {
-          "allowanceUSD": 20,
-          "source": "estimated",
-          "note": "Pro 含等值$20 高级模型资源；额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro 订阅包含（Credits 积分制，无公开每 token 单价）"
         },
         "qwen3.8-max": {
-          "allowanceUSD": 20,
-          "source": "estimated",
-          "note": "Pro 含等值$20 高级模型资源；额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro 订阅包含（Credits 积分制，无公开每 token 单价）"
         },
         "claude-sonnet-5": {
-          "allowanceUSD": 20,
-          "source": "estimated",
-          "note": "Pro 含等值$20 高级模型资源；Claude 是否上架待确认"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro 订阅包含（Credits 积分制；Claude 是否上架待确认）"
         },
         "gpt-5.6-luna": {
-          "allowanceUSD": 20,
-          "source": "estimated",
-          "note": "Pro 含等值$20 高级模型资源；GPT 是否上架待确认"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro 订阅包含（Credits 积分制；GPT 是否上架待确认）"
         }
       }
     },
@@ -1362,38 +1487,39 @@
       "vendor": "Qoder (阿里)",
       "plan": "Pro+",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 60,
       "url": "https://docs.qoder.com/account/pricing",
       "models": {
         "qwen3.7-flash": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "Pro+ 含 6,000 Credits（等值$60）；额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro+ 订阅包含（Credits 积分制，无公开每 token 单价）"
         },
         "qwen3.8-flash": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "Pro+ 含等值$60；额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro+ 订阅包含（Credits 积分制，无公开每 token 单价）"
         },
         "qwen3.7-max": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "Pro+ 含等值$60；额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro+ 订阅包含（Credits 积分制，无公开每 token 单价）"
         },
         "qwen3.8-max": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "Pro+ 含等值$60；额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro+ 订阅包含（Credits 积分制，无公开每 token 单价）"
         },
         "claude-sonnet-5": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "Pro+ 含等值$60；Claude 是否上架待确认"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro+ 订阅包含（Credits 积分制；Claude 是否上架待确认）"
         },
         "gpt-5.6-luna": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "Pro+ 含等值$60；GPT 是否上架待确认"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Pro+ 订阅包含（Credits 积分制；GPT 是否上架待确认）"
         }
       }
     },
@@ -1402,38 +1528,39 @@
       "vendor": "Qoder (阿里)",
       "plan": "Ultra",
       "type": "official_subscription",
+      "billing": "subscription",
       "monthlyUSD": 200,
       "url": "https://docs.qoder.com/account/pricing",
       "models": {
         "qwen3.7-flash": {
-          "allowanceUSD": 200,
-          "source": "estimated",
-          "note": "Ultra 含 20,000 Credits（等值$200）；额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Ultra 订阅包含（Credits 积分制，无公开每 token 单价）"
         },
         "qwen3.8-flash": {
-          "allowanceUSD": 200,
-          "source": "estimated",
-          "note": "Ultra 含等值$200；额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Ultra 订阅包含（Credits 积分制，无公开每 token 单价）"
         },
         "qwen3.7-max": {
-          "allowanceUSD": 200,
-          "source": "estimated",
-          "note": "Ultra 含等值$200；额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Ultra 订阅包含（Credits 积分制，无公开每 token 单价）"
         },
         "qwen3.8-max": {
-          "allowanceUSD": 200,
-          "source": "estimated",
-          "note": "Ultra 含等值$200；额度估算"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Ultra 订阅包含（Credits 积分制，无公开每 token 单价）"
         },
         "claude-sonnet-5": {
-          "allowanceUSD": 200,
-          "source": "estimated",
-          "note": "Ultra 含等值$200；Claude 是否上架待确认"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Ultra 订阅包含（Credits 积分制；Claude 是否上架待确认）"
         },
         "gpt-5.6-luna": {
-          "allowanceUSD": 200,
-          "source": "estimated",
-          "note": "Ultra 含等值$200；GPT 是否上架待确认"
+          "subscription": true,
+          "source": "official",
+          "note": "Qoder Ultra 订阅包含（Credits 积分制；GPT 是否上架待确认）"
         }
       }
     }
