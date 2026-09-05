@@ -250,10 +250,10 @@
       "contextWindow": 1050000,
       "tier": "旗舰",
       "api": {
-        "input": 4.0,
-        "cachedInput": 0.4,
-        "output": 20.0,
-        "note": "OpenAI 官方价 $4.00/$0.40/$20.00 每百万"
+        "input": 5.0,
+        "cachedInput": 0.5,
+        "output": 30.0,
+        "note": "OpenAI 官方价 $5.00/$0.50/$30.00 每百万（GPT-5.6 Sol；rate card 125/12.5/750 credits/1M，1 credit=$0.04）"
       }
     },
     {
@@ -1036,37 +1036,32 @@
     {
       "id": "codex",
       "vendor": "Codex (OpenAI)",
-      "plan": "Pro",
-      "type": "coding_plan",
-      "billing": "subscription",
+      "plan": "Codex（rate card）",
+      "type": "official_coding_plan",
+      "billing": "credit",
       "monthlyUSD": 20,
       "allowance": {
-        "summary": "内置于 ChatGPT Plus $20；Credit 按 token 计费（官方 rate card）",
-        "detail": "Codex 无独立订阅，内置于 ChatGPT Plus $20。自 2026-04-02 起按 API token 对齐的 Credit 计费（官方 rate card，credits/1M tokens）：GPT-5.6 Sol 125/12.5/750、Terra 50/5/300、Luna 5/0.5/30（输入/缓存输入/输出）；1 credit≈$0.04（第三方报道，OpenAI 未明示单 credit 美元价；另有 2× 口径 250/25/1500 报道，以 OpenAI 官方 rate card 为准）。Plus 公开额度：GPT-5.6 Sol 15–90 本地消息/5h 窗口（速率档为真实上限）。Credits 可加购。",
-        "source": "help.openai.com Codex rate card（2026 更新）；codexinsider 2026-07",
-        "verified": "2026-07"
+        "summary": "无独立订阅；随 ChatGPT Plus/Pro 档，按官方 rate card 计费（1 credit=$0.04=API价）",
+        "detail": "Codex 无独立订阅，额度随 ChatGPT Plus($20)/Pro($100 5×)/Pro($200 20×) 档递增；自 2026-04-02 起按 API token 对齐的 Credit 计费（官方 rate card，credits/1M tokens）：GPT-5.6 Sol 125/12.5/750、Terra 50/5/300、Luna 5/0.5/30（输入/缓存输入/输出）；1 credit=$0.04，恰等于 OpenAI 官方 API 价，故每 token 边际成本=API价。Plus 为速率/周限额（非固定token池）；Pro 5×/20× 为更高速率档。Credits 可加购。下方「综合价」即按 API 价折算的每亿 token 成本。",
+        "source": "help.openai.com Codex rate card（2026-08/09 更新）；morphllm/inventivehq 2026-08 折算 1 credit=$0.04",
+        "verified": "2026-09"
       },
       "url": "https://openai.com/codex",
       "models": {
         "gpt-5.6-luna": {
-          "subscription": true,
+          "rate": { "input": 0.2, "cachedInput": 0.02, "output": 1.2 },
           "source": "official",
-          "note": "Codex Pro 订阅包含（按请求/速率，无公开每 token 单价）"
+          "note": "Codex 官方 rate card（=API价，1 credit=$0.04）"
         },
         "gpt-5.6-terra": {
-          "subscription": true,
+          "rate": { "input": 2.0, "cachedInput": 0.2, "output": 12.0 },
           "source": "official",
-          "note": "Codex Pro 订阅包含（按请求/速率，无公开每 token 单价）"
+          "note": "Codex 官方 rate card（=API价，1 credit=$0.04）"
         },
         "gpt-5.6-sol": {
-          "subscription": true,
+          "rate": { "input": 5.0, "cachedInput": 0.5, "output": 30.0 },
           "source": "official",
-          "note": "Codex Pro 订阅包含（按请求/速率，无公开每 token 单价）"
-        },
-        "gpt-6-astra": {
-          "subscription": true,
-          "source": "official",
-          "note": "Codex Pro 订阅包含（按请求/速率，无公开每 token 单价）"
+          "note": "Codex 官方 rate card（=API价，1 credit=$0.04）"
         }
       }
     },
@@ -1311,10 +1306,10 @@
       "billing": "subscription",
       "monthlyUSD": 20,
       "allowance": {
-        "summary": "~80 GPT-5.x 消息/3h 窗口（官方不公布硬上限）",
-        "detail": "ChatGPT Plus $20：约 80 条 GPT-5.x 消息/3 小时窗口（OpenAI 不公布硬数字，社区实测，非高峰更高）；含 GPT-5.4/5.6 Terra 等；无 GPT-5 Pro 推理模式；Deep Research ~25/月、Sora 短片等限制。GPT-5 Pro 模式为 Pro 专属。",
-        "source": "tokenkarma.app 2026-07 OpenAI rate limits；openaitoolshub 2026-05",
-        "verified": "2026-07"
+        "summary": "含 Codex：按官方 rate card 计费（1 credit=$0.04=API价），每 token 成本=API价",
+        "detail": "ChatGPT Plus $20 含 Codex：用量按官方 rate card 计 credit（Sol 125/Terra 50/Luna 5 credits per 1M tok，1 credit=$0.04 恰等于 API 价），即每 token 边际成本=API价；Plus 为速率/周限额（非固定 token 池，约 GPT-5.6 Sol 15–90 本地消息/5h 窗口，社区实测），非高峰额度更高。GPT-5 Pro 推理模式为 Pro 专属。想看「每亿 token 多少钱」直接看同模型的 Codex（rate card）行——两者单价相同，差异仅在月度额度上限。",
+        "source": "help.openai.com Codex rate card；tokenkarma.app 2026-07 OpenAI rate limits",
+        "verified": "2026-09"
       },
       "url": "https://openai.com/chatgpt/pricing",
       "models": {
@@ -1348,10 +1343,10 @@
       "billing": "subscription",
       "monthlyUSD": 200,
       "allowance": {
-        "summary": "实质无限；GPT-5 Pro 20× 推理模式",
-        "detail": "ChatGPT Pro $200：实质无限使用；含 GPT-5 Pro 20× 扩展推理模式；Pro 档速率（tokenkarma 2026-07）：Sol ~80/3h、Terra ~200/3h、Luna ~400/3h 消息窗口；另有 $100 的 5× 档（约 1/4 额度）。",
-        "source": "tokenkarma.app 2026-07 OpenAI rate limits",
-        "verified": "2026-07"
+        "summary": "含 Codex 20× 额度（相对 Plus）；同样按 API rate card 计费，每 token 成本=API价",
+        "detail": "ChatGPT Pro $200 含 Codex 20× 额度（相对 Plus；另有 $100 的 5× 档），同样按官方 rate card 计 credit（1 credit=$0.04=API价），每 token 边际成本=API价；Pro 档为高速率（Sol ~80/3h、Terra ~200/3h、Luna ~400/3h 消息窗口，社区实测），含 GPT-5 Pro 20× 推理模式。下方同模型「每亿 token 多少钱」与 Codex（rate card）行单价相同，差异仅在额度上限。",
+        "source": "help.openai.com Codex rate card；tokenkarma.app 2026-07；网易/环球网 2026-04 Pro 档倍数",
+        "verified": "2026-09"
       },
       "url": "https://openai.com/chatgpt/pricing",
       "models": {

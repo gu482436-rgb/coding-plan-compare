@@ -397,7 +397,7 @@ function renderCompare() {
   const cheapest = priced.length ? priced.reduce((a, b) => b.blended < a.blended ? b : a) : null;
   document.getElementById("cmpHint").textContent = arr.length ? `共 ${arr.length} 个 plan 提供 ${mName}（其中 ${priced.length} 个有公开单价可比）` : `暂无 plan 提供 ${mName}`;
   document.getElementById("cmpSummary").innerHTML = cheapest
-    ? `✅ <b>${mName}</b> 最便宜：<b>${cheapest.plan.vendor} · ${cheapest.plan.plan}</b>，综合价 $${show(cheapest.blended)}${unitLabel()}；${cheapest.plan.byok ? "平台直连（" + allowShow(cheapest.eff.allowanceUSD) + "）" : "月费 $" + cheapest.plan.monthlyUSD + "、额度 " + allowShow(cheapest.eff.allowanceUSD)}。`
+    ? `✅ <b>${mName}</b> 最便宜：<b>${cheapest.plan.vendor} · ${cheapest.plan.plan}</b>，综合价 $${show(cheapest.blended)}${unitLabel()}；${cheapest.plan.byok ? "平台直连（" + allowShow(cheapest.eff.allowanceUSD) + "）" : (cheapest.eff.officialRate ? "按官方 rate card 计费（每 token=API价）" : "月费 $" + cheapest.plan.monthlyUSD + "、额度 " + allowShow(cheapest.eff.allowanceUSD))}。`
     : "该模型暂无可比单价（仅有订阅制 plan，按请求/速率计费）。";
 }
 
