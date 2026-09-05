@@ -320,6 +320,58 @@
         "output": 3.75,
         "note": "官方价 $0.75/$0.075/$3.75 每百万"
       }
+    },
+    {
+      "id": "mimo-v2.5",
+      "name": "MiMo V2.5",
+      "maker": "小米",
+      "contextWindow": 1048576,
+      "tier": "轻量",
+      "api": {
+        "input": 0.14,
+        "cachedInput": 0.0028,
+        "output": 0.28,
+        "note": "小米 MiMo 海外官方价(2026-08-06)：$0.14(未命中)/$0.0028(缓存命中)/$0.28 每百万（国内 ¥1/¥0.02/¥2）"
+      }
+    },
+    {
+      "id": "glm-5.2",
+      "name": "GLM-5.2",
+      "maker": "智谱 AI",
+      "contextWindow": 1000000,
+      "tier": "旗舰",
+      "api": {
+        "input": 1.111,
+        "cachedInput": 0.278,
+        "output": 3.889,
+        "note": "火山方舟/智谱官方价 ¥8/¥2/¥28 每百万（≈$1.111/$0.278/$3.889，¥7.2）"
+      }
+    },
+    {
+      "id": "qwen3.7-plus",
+      "name": "Qwen3.7 Plus",
+      "maker": "阿里巴巴",
+      "contextWindow": 1000000,
+      "tier": "均衡",
+      "api": {
+        "input": 0.278,
+        "cachedInput": 0.0556,
+        "output": 1.111,
+        "note": "阿里百炼/火山方舟官方价 ¥2/¥0.4/¥8 每百万（≤256K；>256K 阶梯上涨；≈$0.278/$0.0556/$1.111，¥7.2）"
+      }
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "maker": "月之暗面",
+      "contextWindow": 262144,
+      "tier": "旗舰",
+      "api": {
+        "input": 0.903,
+        "cachedInput": 0.181,
+        "output": 3.75,
+        "note": "Kimi 官方 API 价 ¥6.5/¥1.3/¥27 每百万（≈$0.903/$0.181/$3.75，¥7.2）；Kimi Code 默认模型"
+      }
     }
   ],
   "plans": [
@@ -1187,6 +1239,49 @@
           "priceMultiplier": 1,
           "source": "official",
           "note": "火山方舟直连官方价 0 加价（豆包 Turbo）"
+        },
+        "deepseek-v4-flash": {
+          "rate": {
+            "input": 0.139,
+            "cachedInput": 0.0278,
+            "output": 0.278
+          },
+          "source": "official",
+          "note": "火山方舟 DeepSeek-V4-Flash 官方价 ¥1/¥0.2/¥2 每百万（≈$0.139/$0.0278/$0.278，¥7.2；活动价缓存¥0.08）；已为低价，无峰谷"
+        },
+        "deepseek-v4-pro": {
+          "rate": {
+            "input": 1.667,
+            "cachedInput": 0.139,
+            "output": 3.333
+          },
+          "source": "official",
+          "note": "火山方舟 DeepSeek-V4-Pro 官方价 ¥12/¥1/¥24 每百万（≈$1.667/$0.139/$3.333，¥7.2；活动价 ¥4.8/¥0.4/¥9.6）"
+        },
+        "glm-5.2": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "火山方舟直连官方价 0 加价（GLM-5.2）"
+        },
+        "qwen3.7-plus": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "火山方舟直连官方价 0 加价（Qwen3.7 Plus）"
+        },
+        "kimi-k2.7-code": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "火山方舟直连官方价 0 加价（Kimi K2.7 Code）"
+        },
+        "minimax-m3": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "火山方舟直连官方价 0 加价（MiniMax M3，≤512K）"
+        },
+        "mimo-v2.5": {
+          "priceMultiplier": 1,
+          "source": "official",
+          "note": "火山方舟直连官方价 0 加价（小米 MiMo V2.5，直连）"
         }
       }
     },
@@ -1561,6 +1656,182 @@
           "subscription": true,
           "source": "official",
           "note": "Qoder Ultra 订阅包含（Credits 积分制；GPT 是否上架待确认）"
+        }
+      }
+    },
+    {
+      "id": "glm-coding-lite",
+      "vendor": "智谱 GLM",
+      "plan": "Coding Plan 个人版 Lite",
+      "type": "official_coding_plan",
+      "billing": "subscription",
+      "monthlyUSD": 16.39,
+      "url": "https://open.bigmodel.cn",
+      "models": {
+        "glm-5.3": {
+          "subscription": true,
+          "source": "official",
+          "note": "GLM Coding Plan 个人版 Lite：¥118/月含 10000 积分，基于 GLM-5.3，非高峰 50% 积分抵扣"
+        }
+      }
+    },
+    {
+      "id": "glm-coding-pro",
+      "vendor": "智谱 GLM",
+      "plan": "Coding Plan 个人版 Pro",
+      "type": "official_coding_plan",
+      "billing": "subscription",
+      "monthlyUSD": 74.72,
+      "url": "https://open.bigmodel.cn",
+      "models": {
+        "glm-5.3": {
+          "subscription": true,
+          "source": "official",
+          "note": "GLM Coding Plan 个人版 Pro：¥538/月含 60000 积分，基于 GLM-5.3，非高峰 50% 积分抵扣"
+        }
+      }
+    },
+    {
+      "id": "glm-coding-max",
+      "vendor": "智谱 GLM",
+      "plan": "Coding Plan 个人版 Max",
+      "type": "official_coding_plan",
+      "billing": "subscription",
+      "monthlyUSD": 149.72,
+      "url": "https://open.bigmodel.cn",
+      "models": {
+        "glm-5.3": {
+          "subscription": true,
+          "source": "official",
+          "note": "GLM Coding Plan 个人版 Max：¥1078/月含 140000 积分，基于 GLM-5.3，非高峰 50% 积分抵扣"
+        }
+      }
+    },
+    {
+      "id": "glm-coding-team",
+      "vendor": "智谱 GLM",
+      "plan": "Coding Plan 团队版标准席位",
+      "type": "official_coding_plan",
+      "billing": "subscription",
+      "monthlyUSD": 83.06,
+      "url": "https://open.bigmodel.cn",
+      "models": {
+        "glm-5.3": {
+          "subscription": true,
+          "source": "official",
+          "note": "GLM Coding Plan 团队版标准席位：¥598/月含 66000 积分/席位（最低 2 席位），基于 GLM-5.3"
+        }
+      }
+    },
+    {
+      "id": "kimi-code-andante",
+      "vendor": "Kimi 官方",
+      "plan": "Kimi Code Andante",
+      "type": "official_coding_plan",
+      "billing": "subscription",
+      "monthlyUSD": 6.81,
+      "url": "https://www.kimi.com/code",
+      "models": {
+        "kimi-k2.7-code": {
+          "subscription": true,
+          "source": "official",
+          "note": "Kimi Code Andante：¥49/月，1× Kimi Code 额度，基于 K2.7 Code，每周刷新额度、会员积分池共享"
+        }
+      }
+    },
+    {
+      "id": "kimi-code-moderato",
+      "vendor": "Kimi 官方",
+      "plan": "Kimi Code Moderato",
+      "type": "official_coding_plan",
+      "billing": "subscription",
+      "monthlyUSD": 13.75,
+      "url": "https://www.kimi.com/code",
+      "models": {
+        "kimi-k2.7-code": {
+          "subscription": true,
+          "source": "official",
+          "note": "Kimi Code Moderato：¥99/月，4× Kimi Code 额度，基于 K2.7 Code，每周刷新额度、会员积分池共享"
+        }
+      }
+    },
+    {
+      "id": "kimi-code-allegretto",
+      "vendor": "Kimi 官方",
+      "plan": "Kimi Code Allegretto",
+      "type": "official_coding_plan",
+      "billing": "subscription",
+      "monthlyUSD": 27.64,
+      "url": "https://www.kimi.com/code",
+      "models": {
+        "kimi-k2.7-code": {
+          "subscription": true,
+          "source": "official",
+          "note": "Kimi Code Allegretto：¥199/月，20× Kimi Code 额度，基于 K2.7 Code，支持 Agent 集群"
+        }
+      }
+    },
+    {
+      "id": "kimi-code-allegro",
+      "vendor": "Kimi 官方",
+      "plan": "Kimi Code Allegro",
+      "type": "official_coding_plan",
+      "billing": "subscription",
+      "monthlyUSD": 97.08,
+      "url": "https://www.kimi.com/code",
+      "models": {
+        "kimi-k2.7-code": {
+          "subscription": true,
+          "source": "official",
+          "note": "Kimi Code Allegro：¥699/月，60× Kimi Code 额度，基于 K2.7 Code，最高并发"
+        }
+      }
+    },
+    {
+      "id": "minimax-token-plus",
+      "vendor": "MiniMax 官方",
+      "plan": "Token Plan Plus",
+      "type": "official_coding_plan",
+      "billing": "subscription",
+      "monthlyUSD": 6.81,
+      "url": "https://platform.minimaxi.com/subscribe/token-plan",
+      "models": {
+        "minimax-m3": {
+          "subscription": true,
+          "source": "official",
+          "note": "MiniMax Token Plan Plus：¥49/月含约 6 亿 token（M3 全系可调用）；用满≈$0.0113/Mtok，超量按标准 API 计费"
+        }
+      }
+    },
+    {
+      "id": "minimax-token-max",
+      "vendor": "MiniMax 官方",
+      "plan": "Token Plan Max",
+      "type": "official_coding_plan",
+      "billing": "subscription",
+      "monthlyUSD": 16.53,
+      "url": "https://platform.minimaxi.com/subscribe/token-plan",
+      "models": {
+        "minimax-m3": {
+          "subscription": true,
+          "source": "official",
+          "note": "MiniMax Token Plan Max：¥119/月含约 18 亿 token（M3 全系可调用）；用满≈$0.0092/Mtok，超量按标准 API 计费"
+        }
+      }
+    },
+    {
+      "id": "minimax-token-ultra",
+      "vendor": "MiniMax 官方",
+      "plan": "Token Plan Ultra",
+      "type": "official_coding_plan",
+      "billing": "subscription",
+      "monthlyUSD": 65.14,
+      "url": "https://platform.minimaxi.com/subscribe/token-plan",
+      "models": {
+        "minimax-m3": {
+          "subscription": true,
+          "source": "official",
+          "note": "MiniMax Token Plan Ultra：¥469/月含约 55 亿 token（M3 全系可调用）；用满≈$0.0118/Mtok，超量按标准 API 计费"
         }
       }
     }

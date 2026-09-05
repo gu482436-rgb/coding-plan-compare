@@ -219,6 +219,23 @@ function effective(plan, modelId) {
     return { subscription: true, source: entry.source || "official", note: entry.note || "订阅包含（无公开每 token 单价）" };
   }
 
+  // 官方直接公布每模型真实单价的计划（如 Command Code、火山方舟托管的不同价模型）：优先用显式 rate，支持峰谷
+  if (entry.rate) {
+    const off = state.apiTier === "offPeak";
+    const r = (off && entry.rate.inputPeak)
+      ? { input: entry.rate.inputPeak, cachedInput: entry.rate.cachedInputPeak ?? entry.rate.inputPeak * 0.1, output: entry.rate.outputPeak }
+      : entry.rate;
+    return {
+      input: r.input,
+      cachedInput: r.cachedInput ?? r.input * 0.1,
+      output: r.output,
+      allowanceUSD: entry.allowanceUSD ?? null,
+      officialRate: true,
+      source: entry.source,
+      note: (entry.note || "") + (off && entry.rate.inputPeak ? "（谷时官方单价）" : "（官方公布单价）")
+    };
+  }
+
   // 峰谷价：选中谷时且该模型有 offPeak 档则用谷时价，否则用峰时(api)
   const api = (state.apiTier === "offPeak" && m.api.offPeak) ? m.api.offPeak : m.api;
 
@@ -234,23 +251,6 @@ function effective(plan, modelId) {
       byok: true,
       source: entry.source,
       note: entry.note
-    };
-  }
-
-  // 官方直接公布每模型真实单价的计划（如 Command Code）：优先用，且支持峰谷切换
-  if (entry.rate) {
-    const off = state.apiTier === "offPeak";
-    const r = (off && entry.rate.inputPeak)
-      ? { input: entry.rate.inputPeak, cachedInput: entry.rate.cachedInputPeak ?? entry.rate.inputPeak * 0.1, output: entry.rate.outputPeak }
-      : entry.rate;
-    return {
-      input: r.input,
-      cachedInput: r.cachedInput ?? r.input * 0.1,
-      output: r.output,
-      allowanceUSD: entry.allowanceUSD ?? null,
-      officialRate: true,
-      source: entry.source,
-      note: (entry.note || "") + (off && entry.rate.inputPeak ? "（谷时官方单价）" : "（官方公布单价）")
     };
   }
 
