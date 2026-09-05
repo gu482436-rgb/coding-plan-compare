@@ -19,11 +19,17 @@
 - 默认 **输入 : 输出 = 3 : 1**（可选 1:1 ~ 10:1）。
 - 单位默认 **每亿 token**，可切每百万。
 
-## 数据来源与诚实声明
-- 价格单位：USD / 每百万 token（`input`=缓存未命中输入，`cachedInput`=缓存命中输入，`output`=输出）。
-- **模型基准价（`models[].api`）全部来自各厂家官方定价页（2026-09-05 核对）**：DeepSeek 官方 docs、OpenAI / Anthropic / xAI 官方、阿里云百炼、智谱 bigmodel.ai、月之暗面 kimi.com、腾讯云 TokenHub、MiniMax 官方。每条 `note` 标注来源与原始币种。
-- **有效单价 = 官方 API 基准价 ×（月费 ÷ 额度 allowanceUSD）**。有峰谷价的模型（DeepSeek V4 全系）在 `api.offPeak` 存谷时价，用「时段」切换；Agent 平台（byok）有效单价 = 官方价 × markup（默认 1.0，0 加价）。
-- 额度 allowanceUSD：订阅制/聚合器 plan 的**额度（信用额）**除 Command Code Go=$10、GOAT=$60 为用户确认外，其余按「月费×倍数」估算并标 `estimated`——这是转售商不公开的数据，请拿官方实时值替换。模型基准价本身均为官方核实价，非估算。
+## 数据来源与诚实声明（原则：只用最准确的数据，绝不编造）
+价格单位：USD / 每百万 token（`input`=缓存未命中输入，`cachedInput`=缓存命中输入，`output`=输出）。
+
+**三类计价方式，精度从高到低：**
+
+1. **官方公布每模型真实单价（`rate`，最高精度）** —— Command Code 全系（Go/GOAT/Pro/Max）在官网逐字公布了每个模型的每百万 token 单价（`docs/plans/go|goat|pro|max`），直接采用，标注 `source: official`。这是本项目最准的来源。
+2. **Agent 平台自带 Key（byok，0 加价）** —— WorkBuddy / CodeBuddy / Kilo Code / Cline / Roo Code 等，以及国内官方 coding plan（Kimi / 智谱 GLM / MiniMax / 火山方舟），有效单价 = 官方 API 价 × markup（默认 1.0，即 0 加价）。准确。
+3. **订阅 / 速率 / Credits 制（不编单价）** —— Cursor、Claude Code、Copilot、Codex、Kiro、Windsurf、各官方订阅档（ChatGPT Plus/Pro、Claude Pro/Max、Google AI Pro/Ultra、SuperGrok）、Qoder 等。这类计划是**按请求数 / 速率档 / 积分**计费，**厂商从不公开"分模型 token 单价"**，任何爬虫都抓不到。本项目**不编造额度**，而是如实标注"订阅包含"，**不参与每 token 单价排名**，仅在单模型对比里显示为「订阅包含」行。
+
+- **模型基准价（`models[].api`）全部来自各厂家官方定价页（2026-09-05 核对）**：DeepSeek 官方 docs、OpenAI / Anthropic / xAI 官方、阿里云百炼、智谱 bigmodel.ai、月之暗面 kimi.com、腾讯云 TokenHub、MiniMax 官方、火山方舟。每条 `note` 标注来源与原始币种。
+- 有峰谷价的模型（DeepSeek V4 全系）在 `api.offPeak` 存谷时价，用「时段」切换。
 
 ## 本地预览
 ```bash
@@ -44,17 +50,15 @@ gh repo create coding-plan-compare --public --source=. --push   # 或自行 git 
 然后在仓库 **Settings → Pages** 选 `main` 分支 `/ (root)`；**Settings → Actions → General → Workflow permissions** 设 `Read and write`。GitHub Actions 会按 `.github/workflows/update.yml` 的**每日 cron（UTC 03:17）**跑脚本并自动 commit。
 
 ## 自动更新到底能更新什么？（重要，别误会）
-脚本 `scripts/update_prices.py` 每日跑，但它**不能凭空编出准确数字**，分两类：
+脚本 `scripts/update_prices.py` 每日跑，但它**不能凭空编出准确数字**：
 
-1. **能自动追新的 —— 官方 API 基准价（`models[].api`）**
+1. **能自动补的 —— 未核实的官方 API 基准价**
    数据源是 LiteLLM 社区维护的 `model_prices_and_context_window.json`（业界广泛引用、持续更新）。
-   脚本每天尝试拉取并刷新已收录模型的官方价；对极新型号（DeepSeek V4 / GPT-5.6 / Claude Sonnet 5 / Grok 4.7 / Qwen 3.8 等 2026 最新代）若 LiteLLM 尚未收录，则保留人工核到的官方价不动。
-   抓取失败（网络/源不可用）会**静默跳过**，不影响校验与提交。
-2. **不能自动更新的 —— 订阅档/聚合器的额度（信用额 `allowanceUSD`）**
-   厂商从不公开「分模型 token 单价」，任何爬虫都抓不到。这部分**只能人工/社区维护**，标 `source=estimated`。
-   当前仅 Command Code Go=$10、GOAT=$60 为用户确认硬值，其余额度均为估算待替换。
+   默认**只补充** `models[].api.autoRefresh=true` 的型号（目前为空，即 23 个模型均为人工官网核实价，**不会被 LiteLLM 覆盖**）。若要放开某型号自动刷新，在 `models[].api` 里加 `"autoRefresh": true` 即可。抓取失败会**静默跳过**，不影响校验与提交。
+2. **绝不伪造的 —— 任何额度 / 单价**
+   所有计价字段（rate / byok / subscription / allowanceUSD）均由数据源或人工维护，脚本只做校验 + 滚动 `lastUpdated`，**从不生成任何价格数字**。
 
-> 结论：每日跑 = 每天校验数据不崩 + 尽量追新官方价 + 滚动 lastUpdated；但「额度」一列的准确性需要你（或提 PR 的 contributor）持续维护，脚本不会伪造它。
+> 结论：每日跑 = 每天校验数据不崩 + 滚动 lastUpdated；官方价经你开启 autoRefresh 后才自动追新。任何"最便宜"排名都只基于真实公布的单价（rate / byok），订阅制计划不参与单价排名，避免假精度。
 
 ## 维护数据
 编辑 `data/pricing.json`：
