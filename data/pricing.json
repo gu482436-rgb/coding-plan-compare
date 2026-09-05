@@ -7,7 +7,7 @@
       "inputOutputRatio": 3,
       "unit": "per_100M"
     },
-    "note": "模型中心结构（2026-09-05 全量官方价核对版）。models[].api = 各家官方定价页核实价（USD/百万token，来源见各模型 note：DeepSeek 官方 docs、OpenAI / Anthropic / xAI 官方、阿里云百炼、智谱 bigmodel.ai、月之暗面 kimi.com、腾讯云 TokenHub、MiniMax 官方）。plans 含 ①第三方 coding 聚合器 ②官方 coding plan ③官方订阅档(Plus/Pro/Max) ④Agent 平台(byok)。订阅制有效单价=官方API价×(月费÷额度allowanceUSD)，额度除 Command Code(用户确认 Go=$10/GOAT=$60)外均为估算(标 est)。Agent 平台(byok)有效单价=官方API价×markup(默认1.0)。缓存命中价：OpenAI=输入10%，其余≈输入10%，DeepSeek 缓存≈输入3%。"
+    "note": "模型中心结构（2026-09-05 全量官方价核对版）。models[].api = 各家官方定价页核实价（USD/百万token）。plans 含 ①第三方 coding 聚合器 ②官方 coding plan ③官方订阅档 ④Agent 平台(byok)。订阅制有效单价=官方API价×(月费÷该模型独立额度allowanceUSD)——**额度是分模型独立的，不是统一池子**（已核实：OpenCode Go 分 $15/$30 两档、Command Code GOAT 各模型 $20~$70 不等）。已核实的硬值：OpenCode Go 分模型额度(llmgateway核实)、Command Code GOAT 的 DeepSeek V4 Flash=$60/ Hy3=$70/ GPT-5.6 Sol=$70/ Qwen3.8 Flash=$20(用户核对)、Go 的 DeepSeek=$10。其余额度标 est 待补。Agent 平台(byok)有效单价=官方API价×markup(默认1.0)。缓存命中价：OpenAI=输入10%，DeepSeek 缓存≈输入3%，其余≈输入10%。"
   },
   "models": [
     {
@@ -372,84 +372,74 @@
       "url": "https://commandcode.ai/zh/pricing",
       "models": {
         "kimi-k3": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（用户确认）"
+          "allowanceUSD": 20,
+          "source": "research",
+          "note": "GOAT 官方分模型额度：$20/月（2x 档，Kimi K3 属此档）"
         },
         "deepseek-v4-flash": {
           "allowanceUSD": 60,
           "source": "user",
-          "note": "GOAT 额度池 $60（用户确认）"
+          "note": "GOAT 官方文档确认 DeepSeek V4 Flash = $60/月（用户确认）"
         },
         "deepseek-v4-pro": {
-          "allowanceUSD": 60,
-          "source": "user",
-          "note": "GOAT 额度池 $60（用户确认）"
+          "allowanceUSD": 20,
+          "source": "research",
+          "note": "GOAT 官方分模型额度：$20/月（DeepSeek V4 Pro 属 2x 档）"
         },
         "glm-5.3-flash": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）"
+          "allowanceUSD": 40,
+          "source": "research",
+          "note": "GOAT 官方分模型额度：$40/月（GLM-5.3 Flash 属 $40 档）"
         },
         "glm-5.3": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）"
+          "allowanceUSD": 20,
+          "source": "research",
+          "note": "GOAT 官方分模型额度：$20/月（GLM-5.3 属 2x 档）"
         },
         "qwen3.7-flash": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）"
+          "allowanceUSD": 20,
+          "source": "research",
+          "note": "GOAT 官方分模型额度：$20/月（旧模型 2x 档）"
         },
         "qwen3.8-flash": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）"
+          "allowanceUSD": 20,
+          "source": "user",
+          "note": "用户核对 + GOAT 文档确认：Qwen3.8 Flash = $20/月额度"
         },
         "qwen3.7-max": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）"
+          "allowanceUSD": 33,
+          "source": "research",
+          "note": "GOAT 官方分模型额度：$33/月（Qwen 3.7 Max 属 $33 档）"
         },
         "qwen3.8-max": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）"
-        },
-        "ling-3.0-flash": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）"
+          "allowanceUSD": 20,
+          "source": "research",
+          "note": "GOAT 官方分模型额度：$20/月（Qwen 3.8 Max 属 2x 档）"
         },
         "minimax-m3": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）"
+          "allowanceUSD": 47,
+          "source": "research",
+          "note": "GOAT 官方分模型额度：$47/月（MiniMax M3 属 $47 档，50% off）"
         },
         "hy3": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）；混元是否上架待确认"
+          "allowanceUSD": 70,
+          "source": "research",
+          "note": "GOAT 官方文档确认 Tencent Hy3 = $70/月（混元上架确认）"
         },
         "hy4": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）；混元是否上架待确认"
-        },
-        "claude-sonnet-5": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）"
+          "allowanceUSD": 20,
+          "source": "research",
+          "note": "GOAT 官方分模型额度：$20/月（Tencent Hy4 Preview 属 2x 档）"
         },
         "gpt-5.6-luna": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）"
+          "allowanceUSD": 20,
+          "source": "research",
+          "note": "GOAT 官方分模型额度：$20/月（GPT-5.6 Luna 属 2x 档）"
         },
-        "gpt-5.6-terra": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "GOAT 额度池 $60（估算）"
+        "gpt-5.6-sol": {
+          "allowanceUSD": 70,
+          "source": "research",
+          "note": "GOAT 官方文档确认 GPT-5.6 Sol = $70/月"
         }
       }
     },
@@ -462,54 +452,59 @@
       "url": "https://commandcode.ai/zh/pricing",
       "models": {
         "kimi-k3": {
-          "allowanceUSD": 120,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Pro 官方文档确认 Kimi K3 = $30/月额度（new open model 档）"
         },
         "deepseek-v4-flash": {
-          "allowanceUSD": 120,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 70,
+          "source": "official",
+          "note": "Pro 官方文档确认 DeepSeek V4 Flash = $70/月额度"
         },
         "deepseek-v4-pro": {
-          "allowanceUSD": 120,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Pro 官方文档确认 DeepSeek V4 Pro = $30/月额度"
         },
         "glm-5.3-flash": {
-          "allowanceUSD": 120,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 50,
+          "source": "official",
+          "note": "Pro 官方文档确认 GLM-5.3 Flash = $50/月额度"
         },
         "glm-5.3": {
-          "allowanceUSD": 120,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Pro 官方文档确认 GLM-5.3 = $30/月额度（new open model 档）"
         },
         "hy3": {
-          "allowanceUSD": 120,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算；混元是否上架待确认"
+          "allowanceUSD": 80,
+          "source": "official",
+          "note": "Pro 官方文档确认 Tencent Hy3 = $80/月额度（Pro 上限档）；混元上架确认"
         },
         "hy4": {
-          "allowanceUSD": 120,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算；混元是否上架待确认"
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Pro 官方文档确认 Tencent Hy4 Preview = $30/月额度（new open model 档）；混元上架确认"
         },
         "claude-sonnet-5": {
-          "allowanceUSD": 120,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 20,
+          "source": "official",
+          "note": "Pro 含 Claude（GOAT 不含）；Pro 官方文档确认 Claude Sonnet 5 = $20/月额度（premium 档）"
         },
         "gpt-5.6-luna": {
-          "allowanceUSD": 120,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Pro 官方文档确认 GPT-5.6 Luna = $30/月额度"
         },
         "gpt-5.6-terra": {
-          "allowanceUSD": 120,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 20,
+          "source": "official",
+          "note": "Pro 含 GPT-5.6 Terra（GOAT 不含）；Pro 官方文档确认 = $20/月额度（premium 档）"
+        },
+        "qwen3.8-flash": {
+          "allowanceUSD": 30,
+          "source": "official",
+          "note": "Pro 官方文档确认 Qwen 3.8 Flash = $30/月额度（new open model 档）"
         }
       }
     },
@@ -519,57 +514,62 @@
       "plan": "Go",
       "type": "coding_plan",
       "monthlyUSD": 10,
-      "url": "https://opencode.ai",
+      "url": "https://opencode.ai/docs/go/",
       "models": {
         "kimi-k3": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 15,
+          "source": "research",
+          "note": "OpenCode Go 官方分模型额度：$15/月档（llmgateway 核实；Go 总月上限$60，但每模型独立封顶）"
         },
         "deepseek-v4-flash": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 30,
+          "source": "research",
+          "note": "OpenCode Go 官方分模型额度：$30/月档（DeepSeek Flash/Hy3/Max 等属此档）"
         },
         "deepseek-v4-pro": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 15,
+          "source": "research",
+          "note": "OpenCode Go 官方分模型额度：$15/月档"
         },
         "glm-5.3-flash": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 15,
+          "source": "research",
+          "note": "OpenCode Go 官方分模型额度：$15/月档（GLM-5.3 同档）"
         },
         "glm-5.3": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 15,
+          "source": "research",
+          "note": "OpenCode Go 官方分模型额度：$15/月档"
         },
         "qwen3.8-flash": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "allowanceUSD": 15,
+          "source": "research",
+          "note": "OpenCode Go 官方支持 Qwen3.8 Flash，按 $15/月档（qwen3.8-max 同档）"
+        },
+        "qwen3.8-max": {
+          "allowanceUSD": 15,
+          "source": "research",
+          "note": "OpenCode Go 官方分模型额度：$15/月档"
         },
         "hy3": {
-          "allowanceUSD": 60,
-          "source": "user",
-          "note": "OpenCode Go 模型清单确认支持 Hy3"
+          "allowanceUSD": 30,
+          "source": "research",
+          "note": "OpenCode Go 官方分模型额度：$30/月档（已确认支持 Hy3）"
         },
         "hy4": {
-          "allowanceUSD": 60,
-          "source": "user",
-          "note": "OpenCode Go 模型清单确认支持 Hy4 preview"
-        },
-        "claude-sonnet-5": {
-          "allowanceUSD": 60,
+          "allowanceUSD": 15,
           "source": "estimated",
-          "note": "额度按 月费×6 估算"
+          "note": "OpenCode Go 确认支持 Hy4 preview，但未列入已公布分档，按 $15 估算"
         },
-        "gpt-5.6-terra": {
-          "allowanceUSD": 60,
-          "source": "estimated",
-          "note": "额度按 月费×6 估算"
+        "gpt-5.6-luna": {
+          "allowanceUSD": 15,
+          "source": "research",
+          "note": "OpenCode Go 官方支持 GPT-5.6 Luna，$15/月档（Go 不含 Terra/Sol/Claude）"
+        },
+        "grok-4.7": {
+          "allowanceUSD": 15,
+          "source": "research",
+          "note": "OpenCode Go 官方支持 Grok，$15/月档"
         }
       }
     },
