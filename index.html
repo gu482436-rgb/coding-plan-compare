@@ -67,6 +67,8 @@
   .badge.off { background: var(--accent-soft); color: var(--accent); border-color: #c7dbff; }
   .badge.est { background: var(--warn-soft); color: var(--warn); border-color: #fcd34d; }
   .badge.user { background: #ecfdf3; color: var(--cheap); border-color: #bbf7d0; }
+  .badge.byok { background: #ecfeff; color: #0e7490; border-color: #a5f3fc; }
+  .badge.credit { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
   .badge.sub { background: #f3e8ff; color: #7c3aed; border-color: #d8b4fe; }
   .chip { display:inline-block; font-size:11px; padding:1px 7px; border-radius:999px; background:#eef2ff; color:#4338ca; margin-left:6px; }
   .price { font-variant-numeric: tabular-nums; }
@@ -77,6 +79,9 @@
   a:hover { text-decoration: underline; }
   .row-click { cursor: pointer; }
   .hint { color: var(--muted); font-size: 12px; margin: 8px 2px 12px; }
+  .count { color: var(--muted); font-size: 12px; margin: 0 2px 8px; }
+  .row-sub td { color: var(--muted); background: var(--panel-2); }
+  .row-sub .badge { opacity: .8; }
   .modelpick { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom: 10px; }
   .modelpick select { min-width: 260px; }
   .updated { color: var(--muted); font-size: 12px; }
@@ -308,14 +313,33 @@ function srcBadge(s) {
   if (s === "estimated") return '<span class="badge est">est</span>';
   return '<span class="badge">参考</span>';
 }
+// 套餐类型标签：让「火山方舟 / 各 Agent 平台」等明确显示是什么套餐
+function planTypeBadge(plan) {
+  if (plan.byok && plan.type === "official_coding_plan") return '<span class="badge byok">云托管·0加价</span>';
+  if (plan.byok) return '<span class="badge byok">Agent平台·自带Key</span>';
+  if (plan.type === "official_coding_plan" && plan.billing === "credit") return '<span class="badge credit">credit计费·=API价</span>';
+  if (plan.type === "official_coding_plan" && plan.billing === "subscription") return '<span class="badge off">官方coding plan</span>';
+  if (plan.type === "coding_plan" && !plan.billing) return '<span class="badge off">官方套餐·按模型单价</span>';
+  if (plan.billing === "subscription") return '<span class="badge sub">订阅制·按请求</span>';
+  return '';
+}
 
 function renderRank() {
   const rows = DATA.models.map(m => {
     const c = cheapestForModel(m.id);
-    return { m, cheapest: c };
-  }).filter(r => r.cheapest);
+    let sub = null;
+    if (!c) {
+      const subs = plansForModel(m.id).filter(r => r.eff.subscription);
+      sub = subs.length ? subs[0] : null;   // 订阅制模型：保留首条订阅套餐用于显示；孤儿模型 sub=null
+    }
+    return { m, cheapest: c, sub };
+  });
   const k = state.sortRank.k, dir = state.sortRank.dir;
   rows.sort((a, b) => {
+    const an = !a.cheapest, bn = !b.cheapest;        // 无可计价套餐的模型恒沉底
+    if (an && bn) return a.m.name.localeCompare(b.m.name, "zh");
+    if (an) return 1;
+    if (bn) return -1;
     let va, vb;
     if (k === "name") { va = a.m.name; vb = b.m.name; return va.localeCompare(vb, "zh") * dir; }
     if (k === "maker") { va = a.m.maker; vb = b.m.maker; return va.localeCompare(vb, "zh") * dir; }
@@ -327,12 +351,28 @@ function renderRank() {
   });
   const tb = document.getElementById("rankBody");
   tb.innerHTML = rows.map(r => {
+    if (!r.cheapest) {
+      const label = r.sub
+        ? `<a href="${r.sub.plan.url}" target="_blank">${r.sub.plan.vendor} · ${r.sub.plan.plan}</a>（订阅制） ${planTypeBadge(r.sub.plan)}</td>`
+        : `无公开套餐 / 价格`;
+      return `<tr class="row-sub">
+        <td class="l">${r.m.name}<span class="badge">${r.m.tier}</span></td>
+        <td class="l">${r.m.maker}</td>
+        <td>${r.m.contextWindow.toLocaleString()}</td>
+        <td class="l">${label}</td>
+        <td class="price muted">—</td>
+        <td class="price muted">订阅包含</td>
+        <td class="price muted">—</td>
+        <td class="price muted">—</td>
+        <td class="price muted">—</td>
+      </tr>`;
+    }
     const c = r.cheapest;
     return `<tr class="row-click" data-model="${r.m.id}">
       <td class="l">${r.m.name}<span class="badge">${r.m.tier}</span></td>
       <td class="l">${r.m.maker}</td>
       <td>${r.m.contextWindow.toLocaleString()}</td>
-      <td class="l"><a href="${c.plan.url}" target="_blank">${c.plan.vendor} · ${c.plan.plan}</a></td>
+      <td class="l"><a href="${c.plan.url}" target="_blank">${c.plan.vendor} · ${c.plan.plan}</a> ${planTypeBadge(c.plan)}</td>
       <td class="price win">$${show(c.blended)}</td>
       <td class="price allow">${allowShow(c.eff.allowanceUSD)}</td>
       <td class="price">$${show(c.eff.input)}</td>
@@ -340,6 +380,11 @@ function renderRank() {
       <td class="price">$${show(c.eff.output)}</td>
     </tr>`;
   }).join("");
+  // 计数提示：直接回答「是否显示完全」
+  const priced = rows.filter(r => r.cheapest).length, subN = rows.length - priced;
+  let cap = document.getElementById("rankCount");
+  if (!cap) { cap = document.createElement("div"); cap.id = "rankCount"; cap.className = "count"; document.getElementById("view-rank").insertBefore(cap, document.querySelector("#view-rank table")); }
+  cap.textContent = `共 ${rows.length} 个模型：${priced} 个有可计价套餐（按综合价排名，越靠上越便宜），${subN} 个为订阅制 / 无公开单价（不参与排名，列于本表底部）`;
   document.getElementById("unitChip1").textContent = unitLabel();
 }
 
@@ -372,7 +417,7 @@ function renderCompare() {
     const typeBadge = r.plan.type === "official_coding_plan" ? '<span class="badge off">官方</span>' : r.plan.type === "agent_platform" ? '<span class="badge off">平台</span>' : r.plan.type === "official_subscription" ? '<span class="badge sub">订阅</span>' : '<span class="badge">聚合</span>';
     if (isSub) {
       return `<tr class="cmp-sub">
-        <td class="l"><a href="${r.plan.url}" target="_blank">${r.plan.vendor} · ${r.plan.plan}</a></td>
+        <td class="l"><a href="${r.plan.url}" target="_blank">${r.plan.vendor} · ${r.plan.plan}</a> ${planTypeBadge(r.plan)}</td>
         <td class="l">${typeBadge}</td>
         <td>${r.plan.byok ? "—" : (r.plan.monthlyUSD === 0 ? "免费" : "$" + r.plan.monthlyUSD)}</td>
         <td class="price allow">${r.eff.allowance ? r.eff.allowance.summary : "订阅包含"}</td>
