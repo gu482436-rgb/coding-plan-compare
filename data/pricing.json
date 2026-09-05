@@ -940,6 +940,12 @@
       "type": "coding_plan",
       "billing": "subscription",
       "monthlyUSD": 20,
+      "allowance": {
+        "summary": "500 快速高级请求/月 + 无限慢速请求",
+        "detail": "Cursor Pro 含 500 fast premium requests/月（GPT-4o、Claude、Gemini 等前沿模型全速）；用尽自动降为无限 slow 请求（同模型、低优先级排队）；Tab 补全无限；Agent/Composer/Background Agents 全开。每请求=1 次对话/Cmd+K 编辑/Agent 步骤（多步 Agent 跑会快速消耗）。",
+        "source": "Cursor 官方定价页；usagebar.com / neuralpaws.com 2026-07/08 核实",
+        "verified": "2026-08"
+      },
       "url": "https://cursor.com/pricing",
       "models": {
         "claude-sonnet-5": {
@@ -1002,6 +1008,12 @@
       "type": "coding_plan",
       "billing": "subscription",
       "monthlyUSD": 10,
+      "allowance": {
+        "summary": "$15/月 GitHub AI Credits（用量制）",
+        "detail": "2026-06-01 起改用 GitHub AI Credits 用量制：Pro 含 $15/月（=$10 base + $5 flex 弹性额度，flex 可能随模型价变动）；代码补全与 next-edit 建议无限（不耗 credits）；含云 Agent、Code Review、第三方 Agent（Claude Code/Codex）接入；超出后 $0.04/请求（按 token 计，费率对齐 GitHub 各模型 API 价）。",
+        "source": "github.blog 2026-06-01 公告；devaireviews 2026-08 核实",
+        "verified": "2026-08"
+      },
       "url": "https://github.com/features/copilot",
       "models": {
         "claude-sonnet-5": {
@@ -1028,6 +1040,12 @@
       "type": "coding_plan",
       "billing": "subscription",
       "monthlyUSD": 20,
+      "allowance": {
+        "summary": "内置于 ChatGPT Plus $20；Credit 按 token 计费（官方 rate card）",
+        "detail": "Codex 无独立订阅，内置于 ChatGPT Plus $20。自 2026-04-02 起按 API token 对齐的 Credit 计费（官方 rate card，credits/1M tokens）：GPT-5.6 Sol 125/12.5/750、Terra 50/5/300、Luna 5/0.5/30（输入/缓存输入/输出）；1 credit≈$0.04（第三方报道，OpenAI 未明示单 credit 美元价；另有 2× 口径 250/25/1500 报道，以 OpenAI 官方 rate card 为准）。Plus 公开额度：GPT-5.6 Sol 15–90 本地消息/5h 窗口（速率档为真实上限）。Credits 可加购。",
+        "source": "help.openai.com Codex rate card（2026 更新）；codexinsider 2026-07",
+        "verified": "2026-07"
+      },
       "url": "https://openai.com/codex",
       "models": {
         "gpt-5.6-luna": {
@@ -1292,6 +1310,12 @@
       "type": "official_subscription",
       "billing": "subscription",
       "monthlyUSD": 20,
+      "allowance": {
+        "summary": "~80 GPT-5.x 消息/3h 窗口（官方不公布硬上限）",
+        "detail": "ChatGPT Plus $20：约 80 条 GPT-5.x 消息/3 小时窗口（OpenAI 不公布硬数字，社区实测，非高峰更高）；含 GPT-5.4/5.6 Terra 等；无 GPT-5 Pro 推理模式；Deep Research ~25/月、Sora 短片等限制。GPT-5 Pro 模式为 Pro 专属。",
+        "source": "tokenkarma.app 2026-07 OpenAI rate limits；openaitoolshub 2026-05",
+        "verified": "2026-07"
+      },
       "url": "https://openai.com/chatgpt/pricing",
       "models": {
         "gpt-5.6-luna": {
@@ -1323,6 +1347,12 @@
       "type": "official_subscription",
       "billing": "subscription",
       "monthlyUSD": 200,
+      "allowance": {
+        "summary": "实质无限；GPT-5 Pro 20× 推理模式",
+        "detail": "ChatGPT Pro $200：实质无限使用；含 GPT-5 Pro 20× 扩展推理模式；Pro 档速率（tokenkarma 2026-07）：Sol ~80/3h、Terra ~200/3h、Luna ~400/3h 消息窗口；另有 $100 的 5× 档（约 1/4 额度）。",
+        "source": "tokenkarma.app 2026-07 OpenAI rate limits",
+        "verified": "2026-07"
+      },
       "url": "https://openai.com/chatgpt/pricing",
       "models": {
         "gpt-5.6-luna": {
@@ -1517,6 +1547,12 @@
       "type": "official_subscription",
       "billing": "subscription",
       "monthlyUSD": 19,
+      "allowance": {
+        "summary": "无公开硬额度（按请求速率限流）",
+        "detail": "Amazon Q Developer Pro $19：官方不公布具体 token/请求硬额度，按请求与速率限流（高峰期排队）；含 Claude Sonnet、GPT-5.6 等模型路由。",
+        "source": "AWS 官方文档（不公布硬额度）",
+        "verified": "2026-09"
+      },
       "url": "https://aws.amazon.com/q/developer/",
       "models": {
         "claude-sonnet-5": {
@@ -1543,6 +1579,12 @@
       "type": "official_subscription",
       "billing": "subscription",
       "monthlyUSD": 20,
+      "allowance": {
+        "summary": "2000 Credits/月",
+        "detail": "Qoder Pro $20：每月 2000 Credits（积分制，按请求/模型消耗）；含千问全系、Claude、GPT、Gemini 多模型路由；Quest 长周期任务、RepoWiki 等；Credits 可结转（部分第三方站点误报 $30，以阿里云官方 $20 为准）。",
+        "source": "阿里云官方计费说明（cnblogs 引述 2026）",
+        "verified": "2026-08"
+      },
       "url": "https://docs.qoder.com/account/pricing",
       "models": {
         "qwen3.7-flash": {
@@ -1584,6 +1626,12 @@
       "type": "official_subscription",
       "billing": "subscription",
       "monthlyUSD": 60,
+      "allowance": {
+        "summary": "6000 Credits/月",
+        "detail": "Qoder Pro+ $60：每月 6000 Credits；面向重度 Agent 自主编码用户；其余同 Pro（多模型路由、Quest、RepoWiki、Credits 可结转）。",
+        "source": "阿里云官方计费说明",
+        "verified": "2026-08"
+      },
       "url": "https://docs.qoder.com/account/pricing",
       "models": {
         "qwen3.7-flash": {
@@ -1625,6 +1673,12 @@
       "type": "official_subscription",
       "billing": "subscription",
       "monthlyUSD": 200,
+      "allowance": {
+        "summary": "20000 Credits/月",
+        "detail": "Qoder Ultra $200：每月 20000 Credits（约 20× 用量）；面向频繁长周期 Quest 任务用户；其余同 Pro（多模型路由、Quest、RepoWiki、Credits 可结转）。",
+        "source": "阿里云官方计费说明",
+        "verified": "2026-08"
+      },
       "url": "https://docs.qoder.com/account/pricing",
       "models": {
         "qwen3.7-flash": {

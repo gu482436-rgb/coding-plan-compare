@@ -216,7 +216,7 @@ function effective(plan, modelId) {
 
   // 订阅制 / 无公开单价：不参与每 token 价格排名，单模型对比只标注「订阅包含」
   if (entry.subscription || plan.billing === "subscription" || plan.type === "official_subscription") {
-    return { subscription: true, source: entry.source || "official", note: entry.note || "订阅包含（无公开每 token 单价）" };
+    return { subscription: true, source: entry.source || "official", note: entry.note || "订阅包含（无公开每 token 单价）", allowance: plan.allowance || null };
   }
 
   // 官方直接公布每模型真实单价的计划（如 Command Code、火山方舟托管的不同价模型）：优先用显式 rate，支持峰谷
@@ -375,9 +375,9 @@ function renderCompare() {
         <td class="l"><a href="${r.plan.url}" target="_blank">${r.plan.vendor} · ${r.plan.plan}</a></td>
         <td class="l">${typeBadge}</td>
         <td>${r.plan.byok ? "—" : (r.plan.monthlyUSD === 0 ? "免费" : "$" + r.plan.monthlyUSD)}</td>
-        <td class="price allow">订阅包含</td>
-        <td class="price muted" colspan="4">无公开每 token 单价（按请求/速率/积分计费）</td>
-        <td class="l">${r.eff.note ? r.eff.note : "订阅包含"}</td>
+        <td class="price allow">${r.eff.allowance ? r.eff.allowance.summary : "订阅包含"}</td>
+        <td class="price muted" colspan="4">${r.eff.allowance ? "订阅额度（不参与每 token 单价排名）" : "无公开每 token 单价（按请求/速率/积分计费）"}</td>
+        <td class="l"><span title="${r.eff.allowance ? (r.eff.allowance.detail + " ｜来源：" + r.eff.allowance.source + " ｜核实：" + r.eff.allowance.verified) : ""}">${r.eff.allowance ? r.eff.allowance.summary : (r.eff.note ? r.eff.note : "订阅包含")}</span>${r.eff.allowance ? ' <span class="src">' + r.eff.allowance.source + '</span>' : ""}</td>
       </tr>`;
     }
     return `<tr class="${isCheap ? "cheap" : ""}">
